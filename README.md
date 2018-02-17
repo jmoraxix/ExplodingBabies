@@ -1,2 +1,2 @@
-# ExplodingBabies
-Bebes explosivos (buscaminas) multijugador
+# ExplodingTeddies
+Osas de peluche explosivos (buscaminas) multijugador
