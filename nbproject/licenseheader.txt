@@ -1,0 +1,13 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}Programacion Concurrente Cliente Servidor
+${licensePrefix}
+${licensePrefix}Melanie Benvides
+${licensePrefix}Jose Mora Loria
+${licensePrefix}Thomas White
+${licensePrefix}
+${licensePrefix}Exploding Teddies
+<#if licenseLast??>
+${licenseLast}
+</#if>
