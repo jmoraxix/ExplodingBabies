@@ -1,10 +1,11 @@
 /*
  * Programacion Concurrente Cliente Servidor
  * 
- * Jose David Mora Loria
- * Adrian Ruiz Porras
- * Carlos Rodriguez Otoya
+ * Melanie Benvides
+ * Jose Mora Loria
+ * Thomas White
  * 
+ * Exploding Teddies
  */
 package explodingteddies.servidor;
 

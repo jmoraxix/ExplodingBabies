@@ -1,13 +1,15 @@
 /*
  * Programacion Concurrente Cliente Servidor
  * 
- * Jose David Mora Loria
- * Adrian Ruiz Porras
- * Carlos Rodriguez Otoya
+ * Melanie Benvides
+ * Jose Mora Loria
+ * Thomas White
  * 
+ * Exploding Teddies
  */
 package explodingteddies.servidor;
 
+import explodingteddies.util.Util;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import proyectocine.util.Util;
 
 /**
  *

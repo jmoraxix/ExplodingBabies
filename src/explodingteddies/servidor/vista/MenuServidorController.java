@@ -1,20 +1,21 @@
 /*
  * Programacion Concurrente Cliente Servidor
  * 
- * Jose David Mora Loria
- * Adrian Ruiz Porras
- * Carlos Rodriguez Otoya
+ * Melanie Benvides
+ * Jose Mora Loria
+ * Thomas White
  * 
+ * Exploding Teddies
  */
-package explodingteddies.servidor.views;
+package explodingteddies.servidor.vista;
 
+import explodingteddies.servidor.MainServidor;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import proyectocine.servidor.MainServidor;
 
 /**
  * FXML Controller class
