@@ -9,7 +9,7 @@
  */
 package explodingteddies.util;
 
-import explodingteddies.model.Usuario;
+import explodingteddies.modelo.Usuario;
 
 /**
  *

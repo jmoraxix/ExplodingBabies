@@ -7,7 +7,7 @@
  * 
  * Exploding Teddies
  */
-package explodingteddies.model;
+package explodingteddies.modelo;
 
 /**
  *
@@ -15,7 +15,11 @@ package explodingteddies.model;
  */
 public enum Dificultad {
 
-    FACIL("Facil", 10, 9, 9), MEDIO("Medio", 18, 9, 15), DIFICIL("Dificil", 30, 16, 16), DARK_SOULS();
+    FACIL("Facil", 10, 9, 9), 
+    MEDIO("Medio", 18, 9, 15), 
+    DIFICIL("Dificil", 30, 16, 16), 
+    DARK_SOULS("Dark Souls", 180, 16, 16), 
+    CHUCK_NORRIS("Chuck Norris", 255, 16, 16);
     
     private String nombre;
     private int cantidadMinas, x, y;

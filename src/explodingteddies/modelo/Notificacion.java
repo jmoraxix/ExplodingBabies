@@ -1,18 +1,21 @@
 /*
  * Programacion Concurrente Cliente Servidor
  * 
- * Jose David Mora Loria
- * Adrian Ruiz Porras
- * Carlos Rodriguez Otoya
+ * Melanie Benvides
+ * Jose Mora Loria
+ * Thomas White
  * 
+ * Exploding Teddies
  */
-package explodingteddies.model;
+package explodingteddies.modelo;
 
 /**
  *
  * @author jdmoralo
  */
 public enum Notificacion {
+    
+    // TODO Cambiar notificaciones
 
     CREA_USUARIO(1),
     CREA_USUARIO_RESULTADO(2),

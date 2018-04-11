@@ -9,7 +9,7 @@
  */
 package explodingteddies.servidor;
 
-import explodingteddies.model.Usuario;
+import explodingteddies.modelo.Usuario;
 import explodingteddies.util.Util;
 import java.io.InputStream;
 import java.util.ArrayList;

@@ -9,9 +9,9 @@
  */
 package explodingteddies.cliente;
 
-import explodingteddies.model.Notificacion;
-import static explodingteddies.model.Notificacion.*;
-import explodingteddies.model.Usuario;
+import explodingteddies.modelo.Notificacion;
+import static explodingteddies.modelo.Notificacion.*;
+import explodingteddies.modelo.Usuario;
 import explodingteddies.util.Util;
 import java.io.IOException;
 import java.io.ObjectInputStream;

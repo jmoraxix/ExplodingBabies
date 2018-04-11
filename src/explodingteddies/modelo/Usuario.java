@@ -7,7 +7,7 @@
  * 
  * Exploding Teddies
  */
-package explodingteddies.model;
+package explodingteddies.modelo;
 
 import java.util.ArrayList;
 
