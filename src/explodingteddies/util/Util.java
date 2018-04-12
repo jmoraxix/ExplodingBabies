@@ -9,7 +9,7 @@
  */
 package explodingteddies.util;
 
-import explodingteddies.modelo.Usuario;
+import explodingteddies.modelo.Jugador;
 
 /**
  *
@@ -26,5 +26,5 @@ public class Util {
     public static String SERVER_IP = "localhost";
     
     //Variables globales de la aplicación
-    public static Usuario CURRENT_USER = null;
+    public static Jugador CURRENT_USER = null;
 }

@@ -11,7 +11,7 @@ package explodingteddies.cliente;
 
 import explodingteddies.modelo.Notificacion;
 import static explodingteddies.modelo.Notificacion.*;
-import explodingteddies.modelo.Usuario;
+import explodingteddies.modelo.Jugador;
 import explodingteddies.util.Util;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -101,7 +101,7 @@ public class Cliente extends Thread {
         }
     }
 
-    public void crearUsuario(Usuario usuario) {
+    public void crearUsuario(Jugador usuario) {
         Gson gson = Util.getGson();
 
         try {

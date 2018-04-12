@@ -1,30 +1,26 @@
 /*
  * Programacion Concurrente Cliente Servidor
- * 
+ *
  * Melanie Benvides
  * Jose Mora Loria
  * Thomas White
- * 
+ *
  * Exploding Teddies
  */
 package explodingteddies.modelo;
-
-import java.util.ArrayList;
 
 /**
  *
  * @author josmora
  */
-public class Usuario {
-    
+public class Jugador {
+
     //Variables
     private String usuario;
-    private String passwd;
 
     //Constructor
-    public Usuario(String usuario, String passwd) {
+    public Jugador(String usuario) {
         this.usuario = usuario;
-        this.passwd = passwd;
     }
 
     public String getUsuario() {
@@ -33,13 +29,5 @@ public class Usuario {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
-    }
-
-    public String getPasswd() {
-        return passwd;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
     }
 }

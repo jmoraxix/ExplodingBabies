@@ -1,20 +1,20 @@
 /*
  * Programacion Concurrente Cliente Servidor
- * 
+ *
  * Melanie Benvides
  * Jose Mora Loria
  * Thomas White
- * 
+ *
  * Exploding Teddies
  */
 package explodingteddies.servidor;
 
+import explodingteddies.modelo.Partida;
 import explodingteddies.util.Util;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,12 +31,15 @@ public class Servidor extends Thread {
     private ExecutorService service;
     private ArrayList<ClienteServidor> clientes = new ArrayList<>();
 
+    // Variables de la aplicacion del servidor.
+    private MainServidor app;
+    private ArrayList<Partida> partidas = new ArrayList<>();
+
     /**
      * Creates new form Servidor
      */
-    public Servidor() {
-        //Inicializa la lista enlazada para almacenar clientes
-        //clientes = new ListaEnlazadaClientes();
+    public Servidor(MainServidor app) {
+        this.app = app;
 
         try {
             agregarLog("Inicia servidor");
@@ -46,8 +49,6 @@ public class Servidor extends Thread {
         } catch (IOException ex) {
             agregarError(ex.toString());
         }
-
-//        new Thread(this);
     }
 
     @Override
@@ -70,18 +71,26 @@ public class Servidor extends Thread {
         }
     }
 
-    //Metodos de TCP
-    //Metodos para manejo de la interfaz
+    // Getters & setters
+    public ArrayList<ClienteServidor> getClientes() {
+        return clientes;
+    }
+
+    public ArrayList<Partida> getPartidas() {
+        return partidas;
+    }
+
+    public void addPartida(Partida partida) {
+        this.partidas.add(partida);
+    }
+
     /**
      * Agrega un log a la consola y/o interfaz
      *
      * @param msj Mensaje a mostrar
      */
     public synchronized void agregarLog(String msj) {
-        Date fecha = new Date(System.currentTimeMillis());
-//        this.txtLog = fecha.toString() + " - " + msj + "\n" + txtLog;
-//        this.txtCajaLog.setText(txtLog);
-        System.out.println(fecha.toString() + " - " + msj + "\n");
+        app.addMessage(msj);
     }
 
     /**
@@ -89,9 +98,6 @@ public class Servidor extends Thread {
      * @param msj
      */
     public synchronized void agregarError(String msj) {
-        Date fecha = new Date(System.currentTimeMillis());
-//        this.txtLog = fecha.toString() + " - " + "ERROR: " + msj + "\n" + txtLog;
-//        this.txtCajaLog.setText(txtLog);
-        System.out.println(fecha.toString() + " - " + "ERROR: " + msj + "\n");
+        app.addMessage("ERROR: " + msj);
     }
 }
