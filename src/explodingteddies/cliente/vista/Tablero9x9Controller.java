@@ -18,7 +18,7 @@ import javafx.fxml.Initializable;
  *
  * @author melbe
  */
-public class TableroController implements Initializable {
+public class Tablero9x9Controller implements Initializable {
 
     /**
      * Initializes the controller class.

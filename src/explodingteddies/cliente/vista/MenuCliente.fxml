@@ -5,35 +5,27 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="546.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="546.0" stylesheets="@clientefxml.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fitHeight="546.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../imagenes/Fondo.jpg" />
-         </image>
-      </ImageView>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="53.0" prefHeight="42.0" prefWidth="316.0" text="Exploding Teddies" textFill="#3a238c">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="53.0" prefHeight="42.0" prefWidth="316.0" styleClass="titulo1" text="Exploding Teddies" textFill="#3a238c">
          <font>
             <Font name="Impact" size="33.0" />
          </font>
       </Label>
-      <Label layoutX="120.0" layoutY="131.0" text="Nivel:" textFill="#095297">
+      <Label layoutX="115.0" layoutY="141.0" styleClass="contenido" text="Dificultad:" textFill="#095297">
          <font>
             <Font name="Impact" size="34.0" />
          </font>
       </Label>
-      <ComboBox id="ComboBOXNivel" layoutX="218.0" layoutY="140.0" prefWidth="150.0" promptText="Facil">
+      <ComboBox id="ComboBOXNivel" layoutX="218.0" layoutY="140.0" prefWidth="150.0" promptText="Eligue una opción">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
       </ComboBox>
-      <Label layoutX="78.0" layoutY="222.0" text="Jugador:" textFill="#01488f">
+      <Label layoutX="130.0" layoutY="232.0" styleClass="contenido" text="Jugador:" textFill="#01488f">
          <font>
             <Font name="Impact" size="34.0" />
          </font>
