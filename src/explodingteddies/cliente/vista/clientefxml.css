@@ -17,6 +17,11 @@
 .titulo2 {
     -fx-font-size: 18px;
 }
+.titulo3 {
+    -fx-font-size: 25px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Impact";
+}
 .contenido {
     -fx-font-size: 20px;
 }
