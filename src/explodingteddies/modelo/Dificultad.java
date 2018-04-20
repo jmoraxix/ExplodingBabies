@@ -16,7 +16,7 @@ package explodingteddies.modelo;
 public enum Dificultad {
 
     FACIL("Facil", 1, 10, 9, 9),
-    MEDIO("Medio", 2, 18, 9, 15),
+    MEDIO("Medio", 2, 18, 9, 16),
     DIFICIL("Dificil", 3, 30, 16, 16),
     DARK_SOULS("Dark Souls", 4, 180, 16, 16),
     CHUCK_NORRIS("Chuck Norris", 5, 255, 16, 16);
