@@ -9,6 +9,7 @@
  */
 package explodingteddies.modelo;
 
+import explodingteddies.modelo.tablero.Tablero;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,7 @@ public class Partida {
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private ArrayList<Jugador> visitas = new ArrayList<>();
 
-    // private Buscaminas tablero;
+    private Tablero tablero;
     private final Dificultad dificultad;
 
     public Partida(Dificultad dificultad) {

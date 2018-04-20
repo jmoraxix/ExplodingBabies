@@ -1,6 +1,7 @@
-package explodingteddies.Logic;
+package explodingteddies.modelo.tablero;
 
 
+import explodingteddies.modelo.Cronometro;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -9,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-public class BuscaMinas extends JFrame implements ActionListener {
+public class Tablero extends JFrame implements ActionListener {
     // Variables de la clase
 
     private int xBorde = 6;
@@ -40,7 +41,7 @@ public class BuscaMinas extends JFrame implements ActionListener {
     private ImageIcon imagenLogo;
 
     // TODO constructor
-    public BuscaMinas() {
+    public Tablero() {
         super("Busca Minas");
         bordeX = 10;
         bordeY = 10;
@@ -65,7 +66,7 @@ public class BuscaMinas extends JFrame implements ActionListener {
 
             imagenLogo = new ImageIcon(ImageIO.read(getClass().getResource("images/logo.gif")));
         } catch (IOException ex) {
-            Logger.getLogger(BuscaMinas.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Tablero.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         nuevoJuego = new JButton(imagenesBoton[GANA]);

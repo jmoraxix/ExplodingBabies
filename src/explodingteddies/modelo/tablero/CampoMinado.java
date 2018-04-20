@@ -1,4 +1,4 @@
-package explodingteddies.Logic;
+package explodingteddies.modelo.tablero;
 
 
 import javax.swing.*;
@@ -18,12 +18,12 @@ public class CampoMinado extends JPanel implements MouseListener, MouseMotionLis
     private boolean jugando = true;
     private boolean boton1pres, boton2pres;
     private int fil, col;
-    private BuscaMinas bm;
+    private Tablero bm;
     private boolean firstClick;
     private int xActual, yActual;
     
     //TODO Interfaz inicializa la ventana
-    public CampoMinado(BuscaMinas buscaMinas, int filas, int columnas, int cantidad) {
+    public CampoMinado(Tablero buscaMinas, int filas, int columnas, int cantidad) {
         bm = buscaMinas;
         fil = filas;
         col = columnas;
@@ -60,7 +60,7 @@ public class CampoMinado extends JPanel implements MouseListener, MouseMotionLis
         llenarMatriz();
         //imprimirMatriz();
         repaint();
-        bm.cambiarImagen(BuscaMinas.NORMAL);
+        bm.cambiarImagen(Tablero.NORMAL);
         bm.setNMinas(cantidadMinas);
         bm.reiniciarCronometro();
         jugando = true;
@@ -170,7 +170,7 @@ public class CampoMinado extends JPanel implements MouseListener, MouseMotionLis
                     jugarDeNuevo();
                     pierde = true;
                     mostrarMinas();
-                    bm.cambiarImagen(BuscaMinas.PIERDE);
+                    bm.cambiarImagen(Tablero.PIERDE);
                 } else if (bloques[x][y].getContent() == Bloque.ZERO) {
                     for (int v = 0; v < xvars.length; v++) {
                         // Verifica para evitar un ArrayIndexOutOfBoundsException
@@ -194,9 +194,9 @@ public class CampoMinado extends JPanel implements MouseListener, MouseMotionLis
             jugarDeNuevo();
             marcarMinas();
             //JOptionPane.showMessageDialog(null, "Gan�\n�Con esa cara qui�n lo hubiera pensado!");
-            bm.cambiarImagen(BuscaMinas.GANA);
+            bm.cambiarImagen(Tablero.GANA);
         } else {
-            bm.cambiarImagen(BuscaMinas.NORMAL);
+            bm.cambiarImagen(Tablero.NORMAL);
         }
     }
     //TODO Interfaz
@@ -267,10 +267,10 @@ public class CampoMinado extends JPanel implements MouseListener, MouseMotionLis
                 }
                 repaint();
             } else {
-                bm.cambiarImagen(BuscaMinas.NORMAL);
+                bm.cambiarImagen(Tablero.NORMAL);
             }
         } else {
-            bm.cambiarImagen(BuscaMinas.NORMAL);
+            bm.cambiarImagen(Tablero.NORMAL);
             if (x == xActual && y == yActual) {
                 if (bloques[x][y].getCubierto() && bloques[x][y].getContent() != Bloque.FLAG) {
                     bloques[x][y].setContent(matriz[x][y]);
@@ -303,7 +303,7 @@ public class CampoMinado extends JPanel implements MouseListener, MouseMotionLis
 
     public void mouseExited(MouseEvent e) {
         if (boton1pres || boton2pres) {
-            bm.cambiarImagen(BuscaMinas.NORMAL);
+            bm.cambiarImagen(Tablero.NORMAL);
         }
         if (xActual >= 0 && xActual < fil && yActual >= 0 && yActual < col && bloques[xActual][yActual].getContent() != Bloque.FLAG) {
             bloques[xActual][yActual].setContent(matriz[xActual][yActual]);
@@ -354,7 +354,7 @@ public class CampoMinado extends JPanel implements MouseListener, MouseMotionLis
                         repaint();
                     }
                 }
-                bm.cambiarImagen(BuscaMinas.ASOMBRA);
+                bm.cambiarImagen(Tablero.ASOMBRA);
                 boton1pres = true;
             } else {
                 boton2pres = true;
@@ -403,7 +403,7 @@ public class CampoMinado extends JPanel implements MouseListener, MouseMotionLis
                     bloques[xActual][yActual].setContent(matriz[xActual][yActual]);
                     repaint();
                 }
-                bm.cambiarImagen(BuscaMinas.NORMAL);
+                bm.cambiarImagen(Tablero.NORMAL);
             }
         }//*/
     }

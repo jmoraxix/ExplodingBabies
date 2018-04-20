@@ -1,15 +1,17 @@
-package explodingteddies.Logic;
+package explodingteddies.modelo;
+
+import explodingteddies.modelo.tablero.Tablero;
 
 
 public class Cronometro extends Thread {
 
     private boolean running;
-    private BuscaMinas bm;
+    private Tablero tablero;
     private boolean keepRunning;
     
     //TODO Logica
     // Crea thread para el cronometro
-    public Cronometro(String name, BuscaMinas b) {
+    public Cronometro(String name, Tablero b) {
         //super(name);
         running = false;
         keepRunning = true;
