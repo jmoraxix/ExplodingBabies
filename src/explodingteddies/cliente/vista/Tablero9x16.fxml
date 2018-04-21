@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="473.0" prefWidth="600.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="explodingteddies.cliente.vista.Tablero9x16Controller">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="650.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="explodingteddies.cliente.vista.Tablero9x16Controller">
     <stylesheets>
         <URL value="@clientefxml.css" />
     </stylesheets>
