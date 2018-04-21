@@ -7,36 +7,23 @@ public class Cronometro extends Thread {
 
     private boolean running;
     private Tablero tablero;
-    private boolean keepRunning;
     
-    //TODO Logica
     // Crea thread para el cronometro
-    public Cronometro(String name, Tablero b) {
-        //super(name);
-        running = false;
-        keepRunning = true;
-        bm = b;
-    }
-
-    public void iniciar() {
+    public Cronometro(Tablero tablero) {
         running = true;
-    }
-
-    public void stopRunning() {
-        keepRunning = false;
+        this.tablero = tablero;
     }
 
     @Override
     public void run() {
-        while (keepRunning) {
+        while (running) {
             try {
-                // We sleep to give the "running" variable a chance to reflect its changed state
                 sleep(1000);
             } catch (InterruptedException ex) {
                 System.err.println("Exception: " + ex.getMessage());
             }
             if (running) {
-                bm.aumentarTiempo();
+                tablero.aumentarTiempo();
             }
         }
     }
