@@ -32,6 +32,10 @@ public class ClienteServidor extends Thread {
     private final Servidor servidor;
     private boolean isRunning = true;
 
+    // Variables partida;
+    private Partida partida = null;
+    private Jugador jugador = null;
+
     /**
      *
      * @param servidor
@@ -84,21 +88,32 @@ public class ClienteServidor extends Thread {
         Dificultad dificultad = Dificultad.convertirValor(Integer.valueOf(strDif));
 
         boolean existePartida = false;
-        for (Partida partida : servidor.getPartidas()) {
-            for (Jugador jugador : partida.getJugadores()) {
-                if
+        for (Partida p : servidor.getPartidas()) {
+            for (Jugador j : p.getJugadores()) {
+                if (j.getJugador().equals(strJugador)) {
+                    existePartida = true;
+                    partida = p;
+                    jugador = j;
+                }
             }
         }
 
-        if (servidor.getPartidas().contains(out)) {
-            try {
-                //System.out.println("notificarCambioColaACliente, " + notificacion.getValor());
-                out.writeUTF(Notificacion.ABRE_PARTIDA.getValor() + ";" + cantidad + "\n");
-                out.flush();
-                //System.out.println("notificarCambioColaACliente");
-            } catch (IOException ex) {
-                Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        String mensaje = "";
+        if (!existePartida) {
+            partida = new Partida(dificultad);
+            jugador = new Jugador(strJugador);
+            mensaje = Notificacion.ABRE_PARTIDA.getValor() + ";";
+        } else {
+            mensaje = Notificacion.CIERRA_PARTIDA.getValor() + ";";
+        }
+
+        try {
+            //System.out.println("notificarCambioColaACliente, " + notificacion.getValor());
+            out.writeUTF(mensaje + partida.getCodigoPartida() + ";" + jugador.getJugador() + "\n");
+            out.flush();
+            //System.out.println("notificarCambioColaACliente");
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

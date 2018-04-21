@@ -16,18 +16,18 @@ package explodingteddies.modelo;
 public class Jugador {
 
     //Variables
-    private String usuario;
+    private String jugador;
 
     //Constructor
     public Jugador(String usuario) {
-        this.usuario = usuario;
+        this.jugador = usuario;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getJugador() {
+        return jugador;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setJugador(String jugador) {
+        this.jugador = jugador;
     }
 }
