@@ -8,10 +8,11 @@ package explodingteddies.modelo.tablero;
 /**
  *
  * @author jmora
+ * @param <T> Tipo del contenido de la matriz
  */
 public class Matriz<T> {
 
-    private int tamX, tamY;
+    private final int tamX, tamY;
 
     private T[][] values;
 
@@ -22,7 +23,7 @@ public class Matriz<T> {
         this.tamY = y;
         for (int i = 0; i < this.tamX; i++) {
             for (int j = 0; j < this.tamY; j++) {
-                this.insert(i, j, defaultVal);
+                this.set(i, j, defaultVal);
             }
         }
 //        Util.log("Matriz inicializada. Tamaño " + this.tamX + "," + this.tamY);
@@ -33,7 +34,7 @@ public class Matriz<T> {
     }
 
     // Insertamos T valor en coordenadas X y Y. Metodo sincronizado para evitar que se inserten varios valores en la misma casilla al mismo tiempo.
-    public synchronized void insert(int x, int y, T value) {
+    public synchronized void set(int x, int y, T value) {
         values[x][y] = value;
     }
 

@@ -14,27 +14,25 @@ package explodingteddies.modelo.tablero;
  * @author josmora
  */
 public enum EstadoBloque {
-    
-    NORMAL("Normal", "bloque.gif"), 
-    PRESIONADO("Presionado", "bloquePresionado.gif"), 
-    MINA("Mina", "mina.gif"), 
-    MARCA("Marca", "marca.gif"), 
-    MINA_EXPLOTO("Mina explota", "minaExplota.gif");
-  
-    private String titulo;
-    private String imagen;
 
-    private EstadoBloque(String titulo, String imagen) {
+    CUBIERTO("Cubierto", 0),
+    DESCUBIERTO("Descubierto", 1),
+    MARCADO("Marcado", 2);
+
+    private String titulo;
+    private int codigo;
+
+    private EstadoBloque(String titulo, int codigo) {
         this.titulo = titulo;
-        this.imagen = imagen;
+        this.codigo = codigo;
     }
 
     public String getTitulo() {
         return titulo;
     }
 
-    public String getImagen() {
-        return imagen;
-    }   
-    
+    public int getCodigo() {
+        return codigo;
+    }
+
 }
