@@ -10,6 +10,7 @@
 package explodingteddies.cliente.vista;
 
 import explodingteddies.cliente.Cliente;
+import explodingteddies.modelo.tablero.Tablero;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -19,13 +20,13 @@ import javafx.fxml.Initializable;
  *
  * @author melbe
  */
-public class TableroController implements Initializable {
+public abstract class TableroController implements Initializable {
     
     // Variables TCP
     private Cliente cliente;
     
     // Variables juego
-    private ArrayListm
+    private Tablero tablero;
 
     /**
      * Initializes the controller class.
