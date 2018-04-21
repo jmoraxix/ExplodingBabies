@@ -23,20 +23,20 @@ public enum Dificultad {
 
     private String nombre;
     private int codigo;
-    private int cantidadMinas, x, y;
+    private int cantidadMinas, fil, col;
 
-    private Dificultad(String nombre, int codigo, int cantidadMinas, int x, int y) {
+    private Dificultad(String nombre, int codigo, int cantidadMinas, int fil, int col) {
         this.nombre = nombre;
         this.codigo = codigo;
         this.cantidadMinas = cantidadMinas;
-        this.x = x;
-        this.y = y;
+        this.fil = fil;
+        this.col = col;
     }
 
-    public static Dificultad convertirValor(int valor) {
+    public static Dificultad convertirValor(int codigo) {
         Dificultad resultado = null;
 
-        switch (valor) {
+        switch (codigo) {
             case 1:
                 resultado = FACIL;
                 break;
@@ -58,4 +58,25 @@ public enum Dificultad {
 
         return resultado;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public int getCantidadMinas() {
+        return cantidadMinas;
+    }
+
+    public int getFil() {
+        return fil;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
 }
