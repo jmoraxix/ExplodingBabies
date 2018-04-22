@@ -1,10 +1,9 @@
 package explodingteddies.modelo.tablero;
 
-
 import explodingteddies.modelo.Dificultad;
 
 public class CampoMinado {
- 
+
     // Variables del juego
     private Tablero tablero;
     private Matriz<ContenidoBloque> matrizContenidoBloque;
@@ -14,18 +13,18 @@ public class CampoMinado {
     private int minasEcontradas;
 //    private boolean firstClick;
 //    private int xActual, yActual;
-    
+
     public CampoMinado(Tablero tablero, Dificultad dificultad) {
         this.tablero = tablero;
         this.dificultad = dificultad;
-        
+
         matrizContenidoBloque = new Matriz<>(dificultad.getFil(), dificultad.getCol(), ContenidoBloque.NORMAL);
         matrizEstadoBloque = new Matriz<>(dificultad.getFil(), dificultad.getCol(), EstadoBloque.CUBIERTO);
-        
+
         ponerMinas();
         calcularNumeros();
     }
-    
+
     // Coloca las minas al azar.
     private void ponerMinas() {
         int contador = 0;
@@ -38,6 +37,7 @@ public class CampoMinado {
             }
         }
     }
+
     //TODO Logica
     // Coloca el numero de minas adyacentes en las celdas que no tienen minas.
     private void calcularNumeros() {
@@ -62,6 +62,7 @@ public class CampoMinado {
             }
         }
     }
+
     //TODO Logica
     // Reinicia los contadores del juego
     private void reiniciarContadores() {
@@ -70,7 +71,7 @@ public class CampoMinado {
         xActual = -1;
         yActual = -1;
     }
-    
+
     // Hace visible un campo y su contenido
     public void descubrirCampo(int x, int y) {
         if (jugando) {
@@ -85,7 +86,17 @@ public class CampoMinado {
                 } else if (matrizContenidoBloque.get(x, y) != ContenidoBloque.MARCA) {
                     matrizEstadoBloque.set(x, y, EstadoBloque.DESCUBIERTO);
                     minasEcontradas++;
-                } else if (matrizContenidoBloque.get(x, y) == EstadoBloque..ZERO) {
+                } else if (matrizContenidoBloque.get(x, y) == EstadoBloque..ZERO
+
+
+
+
+
+
+
+
+
+                    ) {
                     for (int v = 0; v < xvars.length; v++) {
                         // Verifica para evitar un ArrayIndexOutOfBoundsException
                         if ((x + xvars[v] >= 0) && (x + xvars[v] < matrizContenidoBloque.length)
@@ -102,46 +113,49 @@ public class CampoMinado {
             } else if (dificultad.getCantidadMinas() == minasEcontradas) {
                 marcarMinas();
                 tablero.detenerPartida(EstadoPartida.GANA);
-            } 
+            }
         }
     }
-    //TODO Interfaz
+
     private void mostrarMinas() {
         for (int i = 0; i < dificultad.getFil(); i++) {
             for (int j = 0; j < dificultad.getCol(); j++) {
-                if (matrizContenidoBloque.get(i, j) == Bloque.FLAG && matrizContenidoBloque[i][j] != Bloque.MINA) {
-                    bloques[i][j].setContent(Bloque.NO_MINA);
-                    bloques[i][j].setCubierto(false);
-                    tablero.aumentarNMinas();
-                }
-                if (matrizContenidoBloque[i][j] == Bloque.MINA && bloques[i][j].getContent() != Bloque.FLAG) {
-                    bloques[i][j].setCubierto(false);
+                if (matrizEstadoBloque.get(i, j) == EstadoBloque.MARCADO
+                        && matrizContenidoBloque.get(i, j) != ContenidoBloque.MARCA) {
+                    matrizContenidoBloque.set(i, j, ContenidoBloque.NO_MINA);
+                    matrizEstadoBloque.set(i, j, EstadoBloque.DESCUBIERTO);
+                    minasEcontradas++;
+                } else if (matrizEstadoBloque.get(i, j) != EstadoBloque.MARCADO
+                        && matrizContenidoBloque.get(i, j) == ContenidoBloque.MINA) {
+                    matrizEstadoBloque.set(i, j, EstadoBloque.DESCUBIERTO);
                 }
             }
         }
     }
-    //TODO Interfaz
+
     public void marcarMinas() {
-        for (int i = 0; i < matrizContenidoBloque.length; i++) {
-            for (int j = 0; j < matrizContenidoBloque[i].length; j++) {
-                if (matrizContenidoBloque[i][j] == Bloque.MINA && bloques[i][j].getContent() != Bloque.FLAG) {
+        for (int i = 0; i < dificultad.getFil(); i++) {
+            for (int j = 0; j < dificultad.getCol(); j++) {
+                if (matrizContenidoBloque.get(i, j) == ContenidoBloque.MINA && matrizEstadoBloque.get(i, j) == EstadoBloque.MARCADO) {
                     marcarCampo(i, j);
                 }
             }
         }
     }
-    
+
+    // TODO Revisar logica
     public void marcarCampo(int x, int y) {
         if (matrizEstadoBloque.get(x, y) == EstadoBloque.CUBIERTO) {
             if (matrizEstadoBloque.get(x, y) == EstadoBloque.MARCADO) {
-                matrizEstadoBloque.set(x, y, EstadoBloque.CUBIERTO) ;
+                matrizEstadoBloque.set(x, y, EstadoBloque.CUBIERTO);
                 minasEcontradas--;
             } else {
-                matrizEstadoBloque.set(x, y, EstadoBloque.MARCADO) ;
+                matrizEstadoBloque.set(x, y, EstadoBloque.MARCADO);
                 minasEcontradas++;
             }
         }
     }
+
     //TODO Interfaz
     public void revelarCampos(int x, int y) {
         int[] xvars = {-1, 0, 1, -1, 1, -1, 0, 1};
