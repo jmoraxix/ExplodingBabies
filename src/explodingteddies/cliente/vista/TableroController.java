@@ -28,12 +28,6 @@ public abstract class TableroController implements Initializable {
     // Variables juego
     private Tablero tablero;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+    
     
 }

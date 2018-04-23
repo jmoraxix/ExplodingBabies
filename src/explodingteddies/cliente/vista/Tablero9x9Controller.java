@@ -11,14 +11,13 @@ package explodingteddies.cliente.vista;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
 
 /**
  * FXML Controller class
  *
  * @author melbe
  */
-public class Tablero9x9Controller implements Initializable {
+public class Tablero9x9Controller extends TableroController {
 
     /**
      * Initializes the controller class.
