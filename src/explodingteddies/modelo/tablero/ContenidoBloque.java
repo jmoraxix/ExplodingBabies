@@ -14,13 +14,13 @@ package explodingteddies.modelo.tablero;
  * @author josmora
  */
 public enum ContenidoBloque {
-    
-    NORMAL("Normal", "bloque.gif"), 
-    PRESIONADO("Presionado", "bloquePresionado.gif"), 
-    MINA("Mina", "mina.gif"), 
-    MARCA("Marca", "marca.gif"), 
+
+    NORMAL("Normal", "bloque.gif"),
+    PRESIONADO("Presionado", "bloquePresionado.gif"),
+    MINA("Mina", "mina.gif"),
+    MARCA("Marca", "marca.gif"),
     NO_MINA("No Mina", "noMina.gif");
-  
+
     private String titulo;
     private String imagen;
 
@@ -35,6 +35,5 @@ public enum ContenidoBloque {
 
     public String getImagen() {
         return imagen;
-    }   
-    
+    }
 }
