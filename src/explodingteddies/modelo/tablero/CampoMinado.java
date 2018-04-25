@@ -2,6 +2,10 @@ package explodingteddies.modelo.tablero;
 
 import explodingteddies.modelo.Dificultad;
 
+/**
+ *
+ * @author jmora
+ */
 public class CampoMinado {
 
     // Variables del juego
@@ -12,14 +16,23 @@ public class CampoMinado {
     private final Dificultad dificultad;
     private boolean jugando = true;
     private int minasEcontradas;
+    private int camposDescubiertos;
 
     // Pares ordenados para revisar adyacencias
     private final int[] xvars = {-1, 0, 1, -1, 1, -1, 0, 1};
     private final int[] yvars = {-1, -1, -1, 0, 0, 1, 1, 1};
 
+    /**
+     *
+     * @param tablero
+     * @param dificultad
+     */
     public CampoMinado(Tablero tablero, Dificultad dificultad) {
         this.tablero = tablero;
         this.dificultad = dificultad;
+
+        this.minasEcontradas = 0;
+        this.camposDescubiertos = 0;
 
         matrizContenidoBloque = new Matriz<>(dificultad.getFil(), dificultad.getCol(), ContenidoBloque.NORMAL);
         matrizAdyacencias = new Matriz<>(dificultad.getFil(), dificultad.getCol(), 0);
@@ -66,6 +79,11 @@ public class CampoMinado {
     }
 
     // Hace visible un campo y su contenido
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public void descubrirCampo(int x, int y) {
         if (jugando) {
             boolean pierde = false;
@@ -74,7 +92,7 @@ public class CampoMinado {
                 // Descubre el campo si no tiene bandera
                 if (matrizContenidoBloque.get(x, y) != ContenidoBloque.MARCA) {
                     matrizEstadoBloque.set(x, y, EstadoBloque.DESCUBIERTO);
-                    minasEcontradas++;
+                    camposDescubiertos++;
                 }
 
                 if (matrizContenidoBloque.get(x, y) == ContenidoBloque.MINA) {
@@ -92,9 +110,9 @@ public class CampoMinado {
                 }
             }
             if (pierde) {
-                marcarMinas();
-                tablero.detenerPartida(EstadoPartida.GANA);
-            } else if (dificultad.getCantidadMinas() == minasEcontradas) {
+                mostrarMinas();
+                tablero.detenerPartida(EstadoPartida.PIERDE);
+            } else if (dificultad.getCantidadMinas() == dificultad.getFil() * dificultad.getCol() - camposDescubiertos) {
                 marcarMinas();
                 tablero.detenerPartida(EstadoPartida.GANA);
             }
@@ -105,10 +123,10 @@ public class CampoMinado {
         for (int i = 0; i < dificultad.getFil(); i++) {
             for (int j = 0; j < dificultad.getCol(); j++) {
                 if (matrizEstadoBloque.get(i, j) == EstadoBloque.MARCADO
-                        && matrizContenidoBloque.get(i, j) != ContenidoBloque.MARCA) {
+                        && matrizContenidoBloque.get(i, j) != ContenidoBloque.MINA) {
                     matrizContenidoBloque.set(i, j, ContenidoBloque.NO_MINA);
                     matrizEstadoBloque.set(i, j, EstadoBloque.DESCUBIERTO);
-                    minasEcontradas++;
+                    minasEcontradas--;
                 } else if (matrizEstadoBloque.get(i, j) != EstadoBloque.MARCADO
                         && matrizContenidoBloque.get(i, j) == ContenidoBloque.MINA) {
                     matrizEstadoBloque.set(i, j, EstadoBloque.DESCUBIERTO);
@@ -117,6 +135,9 @@ public class CampoMinado {
         }
     }
 
+    /**
+     *
+     */
     public void marcarMinas() {
         for (int i = 0; i < dificultad.getFil(); i++) {
             for (int j = 0; j < dificultad.getCol(); j++) {
@@ -128,6 +149,11 @@ public class CampoMinado {
     }
 
     // TODO Revisar logica
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public void marcarCampo(int x, int y) {
         if (matrizEstadoBloque.get(x, y) == EstadoBloque.CUBIERTO) {
             if (matrizEstadoBloque.get(x, y) == EstadoBloque.MARCADO) {
@@ -140,6 +166,11 @@ public class CampoMinado {
         }
     }
 
+    /**
+     *
+     * @param x
+     * @param y
+     */
     public void revelarCampos(int x, int y) {
         int cantMarcas = 0;
 
@@ -164,4 +195,31 @@ public class CampoMinado {
             }
         } // TODO Revisar logica 
     }
+
+    // Metodo que recibe la jugada
+    /**
+     *
+     * @param x
+     * @param y
+     * @param clickDer
+     */
+    public void jugar(int x, int y, boolean clickDer) {
+        if (clickDer) {
+            marcarCampo(x, y);
+        }
+    }
+
+    // Getters de las matrices
+    public Matriz<ContenidoBloque> getMatrizContenidoBloque() {
+        return matrizContenidoBloque;
+    }
+
+    public Matriz<Integer> getMatrizAdyacencias() {
+        return matrizAdyacencias;
+    }
+
+    public Matriz<EstadoBloque> getMatrizEstadoBloque() {
+        return matrizEstadoBloque;
+    }
+
 }
