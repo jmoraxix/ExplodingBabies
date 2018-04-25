@@ -5,36 +5,36 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="547.0" prefWidth="546.0" stylesheets="@clientefxml.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="53.0" prefHeight="42.0" prefWidth="316.0" styleClass="titulo1" text="Exploding Teddies" textFill="#3a238c">
-         <font>
-            <Font name="Impact" size="33.0" />
-         </font>
-      </Label>
-      <Label layoutX="115.0" layoutY="141.0" styleClass="contenido" text="Dificultad:" textFill="#095297">
-         <font>
-            <Font name="Impact" size="34.0" />
-         </font>
-      </Label>
-      <ComboBox id="ComboBOXNivel" layoutX="218.0" layoutY="140.0" prefWidth="150.0" promptText="Eligue una opción">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-      </ComboBox>
-      <Label layoutX="130.0" layoutY="232.0" styleClass="contenido" text="Jugador:" textFill="#01488f">
-         <font>
-            <Font name="Impact" size="34.0" />
-         </font>
-      </Label>
-      <TextField layoutX="218.0" layoutY="223.0" prefHeight="42.0" prefWidth="165.0" />
-      <Button layoutX="201.0" layoutY="347.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="144.0" text="JUGAR" textFill="#e01629">
-         <font>
-            <Font name="Impact" size="33.0" />
-         </font>
-      </Button>
-   </children>
-</Pane>
+<AnchorPane id="AnchorPane" prefHeight="547.0" prefWidth="546.0" stylesheets="@clientefxml.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="explodingteddies.cliente.vista.MenuClienteController">
+    <children>
+        <Label alignment="CENTER" contentDisplay="CENTER" layoutX="115.0" layoutY="53.0" prefHeight="42.0" prefWidth="316.0" styleClass="titulo1" text="Exploding Teddies" textFill="#3a238c">
+            <font>
+                <Font name="Impact" size="33.0" />
+            </font>
+        </Label>
+        <Label layoutX="115.0" layoutY="141.0" styleClass="contenido" text="Dificultad:" textFill="#095297">
+            <font>
+                <Font name="Impact" size="34.0" />
+            </font>
+        </Label>
+        <ComboBox id="ComboBOXNivel" layoutX="218.0" layoutY="140.0" prefWidth="150.0" promptText="Eligue una opción">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+        </ComboBox>
+        <Label layoutX="130.0" layoutY="232.0" styleClass="contenido" text="Jugador:" textFill="#01488f">
+            <font>
+                <Font name="Impact" size="34.0" />
+            </font>
+        </Label>
+        <TextField layoutX="218.0" layoutY="223.0" prefHeight="42.0" prefWidth="165.0" />
+        <Button layoutX="201.0" layoutY="347.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="144.0" text="JUGAR" textFill="#e01629">
+            <font>
+                <Font name="Impact" size="33.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

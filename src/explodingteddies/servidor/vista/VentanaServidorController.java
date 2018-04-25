@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 
 /**
  * FXML Controller class
@@ -26,7 +26,7 @@ public class VentanaServidorController implements Initializable {
 
     private MainServidor application;
     @FXML
-    private TextField txtPanel;
+    private TextArea txtPanel;
 
     public void setApp(MainServidor application) {
         this.application = application;
@@ -38,15 +38,11 @@ public class VentanaServidorController implements Initializable {
 //                -> {
 //            System.out.println("btnReservaciones");
 //        });
+
+        this.txtPanel.setWrapText(false);
     }
 
-    public void addMessage(String message) {
-//        Date fecha = new Date(System.currentTimeMillis());
-//        System.out.println(fecha.toString() + " - " + msj + "\n");
-
-        this.txtPanel.setText(
-                this.txtPanel.getText()
-                + new Date() + " - " + message + "/n"
-        );
+    public synchronized void addMessage(String message) {
+        this.txtPanel.appendText("\n" + new Date() + " - " + message);
     }
 }

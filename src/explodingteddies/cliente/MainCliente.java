@@ -10,7 +10,6 @@
 package explodingteddies.cliente;
 
 import explodingteddies.cliente.vista.MenuClienteController;
-import explodingteddies.cliente.vista.VerPeliculasController;
 import explodingteddies.util.Util;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -69,20 +68,11 @@ public class MainCliente extends Application {
         }
     }
 
-    public void gotoVerPeliculas() {
-        try {
-            VerPeliculasController verPeliculas = (VerPeliculasController) replaceSceneContent("VerPeliculas.fxml");
-            verPeliculas.setApp(this);
-        } catch (Exception ex) {
-            Logger.getLogger(MainCliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        InputStream in = MainCliente.class.getResourceAsStream(fxml);
+        InputStream in = MainCliente.class.getResourceAsStream("vista/" + fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
-        loader.setLocation(MainCliente.class.getResource(fxml));
+        loader.setLocation(MainCliente.class.getResource("vista/" + fxml));
         AnchorPane page;
         try {
             page = (AnchorPane) loader.load(in);

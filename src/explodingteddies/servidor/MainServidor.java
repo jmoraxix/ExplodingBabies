@@ -60,12 +60,12 @@ public class MainServidor extends Application {
         servidor = new Servidor(this);
         servidor.start();
 
-        addMessage("Servidor inicializado.");
+        addMessage("Servidor ha iniciado correctamente.");
     }
 
     public void initWindow() {
         try {
-            ventanaPrincipal = (VentanaServidorController) replaceSceneContent("vista/MenuServidor.fxml");
+            ventanaPrincipal = (VentanaServidorController) replaceSceneContent("VentanaServidor.fxml");
             ventanaPrincipal.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(MainServidor.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,9 +74,9 @@ public class MainServidor extends Application {
 
     private Initializable replaceSceneContent(String fxml) throws Exception {
         FXMLLoader loader = new FXMLLoader();
-        InputStream in = MainServidor.class.getResourceAsStream(fxml);
+        InputStream in = MainServidor.class.getResourceAsStream("vista/" + fxml);
         loader.setBuilderFactory(new JavaFXBuilderFactory());
-        loader.setLocation(MainServidor.class.getResource(fxml));
+        loader.setLocation(MainServidor.class.getResource("vista/" + fxml));
         AnchorPane page;
         try {
             page = (AnchorPane) loader.load(in);

@@ -12,10 +12,7 @@ package explodingteddies.cliente.vista;
 import explodingteddies.cliente.MainCliente;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -24,13 +21,8 @@ import javafx.scene.input.MouseEvent;
  */
 public class MenuClienteController implements Initializable {
 
-    @FXML
-    private ImageView btnPeliculas;
-    @FXML
-    private ImageView btnComida;
-    @FXML
-    private ImageView btnReservaciones;
-
+//    @FXML
+//    private ImageView btnPeliculas;
     private MainCliente application;
 
     public void setApp(MainCliente application) {
@@ -39,19 +31,11 @@ public class MenuClienteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        btnPeliculas.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
-                -> {
-            System.out.println("btnPeliculas");
-            application.gotoVerPeliculas();
-        });
-        btnComida.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
-                -> {
-            System.out.println("btnComida");
-        });
-        btnReservaciones.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
-                -> {
-            System.out.println("btnReservaciones");
-        });
+//        btnPeliculas.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
+//                -> {
+//            System.out.println("btnPeliculas");
+//            application.gotoVerPeliculas();
+//        });
     }
 
 }
