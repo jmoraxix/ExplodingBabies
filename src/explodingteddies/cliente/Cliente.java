@@ -11,7 +11,6 @@ package explodingteddies.cliente;
 
 import explodingteddies.modelo.Notificacion;
 import static explodingteddies.modelo.Notificacion.*;
-import explodingteddies.modelo.Jugador;
 import explodingteddies.util.Util;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -27,18 +26,16 @@ import java.util.logging.Logger;
 public class Cliente extends Thread {
 
     protected static String SERVER_IP = Util.SERVER_IP;
-    protected static int SERVER_PORT = 2356;
+    protected static int SERVER_PORT = Util.SERVER_PORT;
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
     protected Socket socket;
     private MainCliente application;
 
     /**
-     * Declara un nuevo cliente. Crea la conexion con el servidor y define los
-     * streams
+     * Declara un nuevo cliente. Crea la conexion con el servidor y define los streams
      *
-     * @param application Recibe la aplicación principal para interactuar con el
-     * usuario
+     * @param application Recibe la aplicación principal para interactuar con el usuario
      */
     public Cliente(MainCliente application) {
         this.application = application;
@@ -66,19 +63,13 @@ public class Cliente extends Thread {
                 String[] datos = entrada.split(";"); // Divide los datos de la entrada en cada ';'
 
                 switch (Notificacion.convertirValor(Integer.parseInt(datos[0]))) {
-                    case CREA_USUARIO_RESULTADO:
+                    case ABRE_PARTIDA:
                         break;
-                    case INICIA_SESION_RESULTADO:
+                    case CIERRA_PARTIDA:
                         break;
-                    case ENVIA_RESERVACIONES:
+                    case ENVIA_JUGADA:
                         break;
-                    case ENVIA_PELICULA:
-                        break;
-                    case ENVIA_HORARIOS:
-                        break;
-                    case ENVIA_COMIDA:
-                        break;
-                    case RESERVACION_COMPLETADA:
+                    case TERMINA_PARTIDA:
                         break;
                     default:
                         break;
@@ -101,31 +92,18 @@ public class Cliente extends Thread {
         }
     }
 
-    public void crearUsuario(Jugador usuario) {
-        Gson gson = Util.getGson();
-
-        try {
-            System.out.println("Creando usuario");
-            System.out.println(gson.toJson(usuario));
-            out.writeUTF(Notificacion.CREA_USUARIO.getValor() + ";" + gson.toJson(usuario));
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void pedirPeliculas() {
-        Gson gson = Util.getGson();
-
-        try {
-            System.out.println("Pidiendo peliculas");
-            out.writeUTF(Notificacion.PEDIR_PELICULA.getValor() + ";");
-            out.flush();
-        } catch (IOException ex) {
-            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
+//    public void crearUsuario(Jugador usuario) {
+//        Gson gson = Util.getGson();
+//
+//        try {
+//            System.out.println("Creando usuario");
+//            System.out.println(gson.toJson(usuario));
+//            out.writeUTF(Notificacion.CREA_USUARIO.getValor() + ";" + gson.toJson(usuario));
+//            out.flush();
+//        } catch (IOException ex) {
+//            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     // GETTERS & SETTERS
     /**
      *

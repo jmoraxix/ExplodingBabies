@@ -2,12 +2,11 @@ package explodingteddies.modelo;
 
 import explodingteddies.modelo.tablero.Tablero;
 
-
 public class Cronometro extends Thread {
 
     private boolean running;
     private Tablero tablero;
-    
+
     // Crea thread para el cronometro
     public Cronometro(Tablero tablero) {
         running = true;
@@ -23,7 +22,7 @@ public class Cronometro extends Thread {
                 System.err.println("Exception: " + ex.getMessage());
             }
             if (running) {
-                tablero.aumentarTiempo();
+//                tablero.aumentarTiempo();
             }
         }
     }

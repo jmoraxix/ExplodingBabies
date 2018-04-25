@@ -26,11 +26,20 @@ public class Partida {
     private Tablero tablero;
     private final Dificultad dificultad;
 
+    /**
+     *
+     * @param dificultad
+     */
     public Partida(Dificultad dificultad) {
         this.codigoPartida = ++Partida.CANTIDAD_PARTIDAS;
         this.dificultad = dificultad;
     }
 
+    /**
+     *
+     * @param dificultad
+     * @param jugador
+     */
     public Partida(Dificultad dificultad, Jugador jugador) {
         this(dificultad);
         this.jugadores.add(jugador);

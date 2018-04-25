@@ -84,6 +84,11 @@ public class ClienteServidor extends Thread {
         }
     }
 
+    /**
+     *
+     * @param strDif
+     * @param strJugador
+     */
     public void entraUsuario(final String strDif, final String strJugador) {
         Dificultad dificultad = Dificultad.convertirValor(Integer.valueOf(strDif));
 
@@ -115,6 +120,15 @@ public class ClienteServidor extends Thread {
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    // Getters y setters
+    public Partida getPartida() {
+        return partida;
+    }
+
+    public Jugador getJugador() {
+        return jugador;
     }
 
 }

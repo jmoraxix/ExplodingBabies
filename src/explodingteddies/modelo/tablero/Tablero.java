@@ -2,6 +2,10 @@ package explodingteddies.modelo.tablero;
 
 import explodingteddies.modelo.Dificultad;
 
+/**
+ *
+ * @author jmora
+ */
 public class Tablero {
 
     // Variables del juego
@@ -10,12 +14,20 @@ public class Tablero {
     private EstadoPartida estadoPartida;
 
     // Constructor de tablero vacio
+    /**
+     *
+     * @param dificultad
+     */
     public Tablero(Dificultad dificultad) {
         this.dificultad = dificultad;
         campoMinado = new CampoMinado(this, dificultad);
         estadoPartida = EstadoPartida.JUGANDO;
     }
 
+    /**
+     *
+     * @param estado
+     */
     public void detenerPartida(EstadoPartida estado) {
         switch (estado) {
             case GANA:
