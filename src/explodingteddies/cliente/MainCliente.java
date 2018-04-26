@@ -10,6 +10,8 @@
 package explodingteddies.cliente;
 
 import explodingteddies.cliente.vista.MenuClienteController;
+import explodingteddies.cliente.vista.TableroController;
+import explodingteddies.modelo.Dificultad;
 import explodingteddies.util.Util;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -63,6 +65,15 @@ public class MainCliente extends Application {
         try {
             MenuClienteController menu = (MenuClienteController) replaceSceneContent("MenuCliente.fxml");
             menu.setApp(this);
+        } catch (Exception ex) {
+            Logger.getLogger(MainCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void gotoTablero(Dificultad dificultad) {
+        try {
+            TableroController tablero = (TableroController) replaceSceneContent("Tablero9x9.fxml");
+            tablero.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(MainCliente.class.getName()).log(Level.SEVERE, null, ex);
         }

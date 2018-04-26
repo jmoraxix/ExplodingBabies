@@ -13,6 +13,7 @@ import explodingteddies.modelo.Dificultad;
 import explodingteddies.modelo.Jugador;
 import explodingteddies.modelo.Notificacion;
 import explodingteddies.modelo.Partida;
+import explodingteddies.util.Util;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -114,7 +115,7 @@ public class ClienteServidor extends Thread {
 
         try {
             //System.out.println("notificarCambioColaACliente, " + notificacion.getValor());
-            out.writeUTF(mensaje + partida.getCodigoPartida() + ";" + jugador.getJugador() + "\n");
+            out.writeUTF(mensaje + Util.getGson().toJson(partida) + "\n");
             out.flush();
             //System.out.println("notificarCambioColaACliente");
         } catch (IOException ex) {

@@ -15,26 +15,27 @@
                 <Font name="Impact" size="33.0" />
             </font>
         </Label>
-        <Label layoutX="115.0" layoutY="141.0" styleClass="contenido" text="Dificultad:" textFill="#095297">
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="39.0" layoutY="140.0" prefHeight="24.0" prefWidth="130.0" styleClass="contenido" text="Dificultad:" textFill="#095297">
             <font>
                 <Font name="Impact" size="34.0" />
             </font>
         </Label>
-        <ComboBox id="ComboBOXNivel" layoutX="218.0" layoutY="140.0" prefHeight="26.0" prefWidth="239.0" promptText="Eligue una opción">
+        <ComboBox fx:id="cbDificultad" layoutX="183.0" layoutY="140.0" prefHeight="26.0" prefWidth="289.0" promptText="Eligue una opción">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
         </ComboBox>
-        <Label layoutX="130.0" layoutY="232.0" styleClass="contenido" text="Jugador:" textFill="#01488f">
+        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="39.0" layoutY="199.0" prefHeight="24.0" prefWidth="130.0" styleClass="contenido" text="Jugador:" textFill="#01488f">
             <font>
                 <Font name="Impact" size="34.0" />
             </font>
         </Label>
-        <TextField layoutX="218.0" layoutY="223.0" prefHeight="42.0" prefWidth="165.0" />
-        <Button layoutX="201.0" layoutY="347.0" mnemonicParsing="false" prefHeight="57.0" prefWidth="144.0" text="JUGAR" textFill="#e01629">
+        <TextField fx:id="txtJugador" layoutX="183.0" layoutY="191.0" prefHeight="42.0" prefWidth="289.0" />
+        <Button fx:id="btnJugar" layoutX="201.0" layoutY="312.0" mnemonicParsing="false" prefHeight="14.0" prefWidth="144.0" text="JUGAR" textFill="#86000d">
             <font>
                 <Font name="Impact" size="33.0" />
             </font>
         </Button>
+      <Label fx:id="lblError" layoutX="183.0" layoutY="248.0" prefHeight="26.0" prefWidth="289.0" text="Label" />
     </children>
 </AnchorPane>

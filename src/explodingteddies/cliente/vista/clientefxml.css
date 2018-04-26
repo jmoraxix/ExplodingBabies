@@ -32,18 +32,6 @@
     -fx-font-family: "Impact";
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
-.btnSalaAdd {
-    -fx-text-fill: white;
-    -fx-background-color: lightseagreen;
-}
-.btnSalaRemove {
-    -fx-text-fill: white;
-    -fx-background-color: lightcoral;
-}
-.btnPrincipal {
-    -fx-text-fill: white;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
-}
-.btnPrincipal:hover {
+/*.button:hover {
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
-}
+}*/
