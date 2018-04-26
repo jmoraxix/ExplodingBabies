@@ -20,7 +20,7 @@
                 <Font name="Impact" size="34.0" />
             </font>
         </Label>
-        <ComboBox id="ComboBOXNivel" layoutX="218.0" layoutY="140.0" prefWidth="150.0" promptText="Eligue una opción">
+        <ComboBox id="ComboBOXNivel" layoutX="218.0" layoutY="140.0" prefHeight="26.0" prefWidth="239.0" promptText="Eligue una opción">
             <opaqueInsets>
                 <Insets />
             </opaqueInsets>
