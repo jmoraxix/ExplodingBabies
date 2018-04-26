@@ -10,6 +10,19 @@ package explodingteddies.modelo.tablero;
  * @author jmora
  * @param <T> Tipo del contenido de la matriz
  */
+
+/**
+ * 
+ * @author twhit
+ * para serializar esta clase, ya que es un generics, hay que  serializarlo usando un typetoken,
+ * el ejemplo en la documentacion de Gson es:
+ * Type fooType = new TypeToken<Foo<Bar>>() {}.getType();
+gson.toJson(foo, fooType);
+
+gson.fromJson(json, fooType);
+ * 
+ * 
+ */
 public class Matriz<T> {
 
     private final int tamX, tamY;
