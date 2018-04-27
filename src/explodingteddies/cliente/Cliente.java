@@ -83,7 +83,7 @@ public class Cliente extends Thread {
                         recibeJugada(datos[1]);
                         break;
                     case SERVIDOR_TERMINA_PARTIDA:
-//                        terminaPartida(datos[1]);
+                        terminaPartida(datos[1]);
                         break;
                     default:
                         break;
@@ -115,17 +115,21 @@ public class Cliente extends Thread {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    private void recibeJugada(String json) {
+        application.recibeJugada(Util.getGson().fromJson(json, Partida.class));
+    }
+    
+    public void terminaPartida(String json){
+        
+    }
+    
     private void abrirPartida(String json) {
         application.crearPartida(Util.getGson().fromJson(json, Partida.class));
     }
 
     private void cerrarPartida(String json) {
         application.cerrarPartida(Util.getGson().fromJson(json, Partida.class));
-    }
-    
-    private void recibeJugada(String json) {
-        application.recibeJugada(Util.getGson().fromJson(json, Partida.class));
     }
     
     public void enviaJugada(Jugador jugador, int x, int y){
