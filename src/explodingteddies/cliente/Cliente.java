@@ -80,10 +80,10 @@ public class Cliente extends Thread {
                         cerrarPartida(datos[1]);
                         break;
                     case SERVIDOR_ENVIA_JUGADA:
-//                        recibeJugada(datos[1]);
+                        recibeJugada(datos[1]);
                         break;
                     case SERVIDOR_TERMINA_PARTIDA:
-//                        terminaPartida(datos[1]);
+                        terminaPartida(datos[1]);
                         break;
                     default:
                         break;
@@ -115,7 +115,14 @@ public class Cliente extends Thread {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public void recibeJugada(String json){
+        
+    }
+    
+    public void terminaPartida(String json){
+        
+    }
     private void abrirPartida(String json) {
         Partida partida = Util.getGson().fromJson(json, Partida.class);
     }
