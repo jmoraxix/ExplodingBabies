@@ -11,9 +11,7 @@ package explodingteddies.cliente.vista;
 
 import explodingteddies.cliente.Cliente;
 import explodingteddies.cliente.MainCliente;
-import explodingteddies.modelo.Dificultad;
 import explodingteddies.modelo.Partida;
-import explodingteddies.modelo.tablero.ContenidoBloque;
 import explodingteddies.modelo.tablero.Matriz;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -44,7 +42,7 @@ public class TableroController implements Initializable {
     private MainCliente application;
 
     // Variables de la ventana
-    private GridPane MatrizPane;
+    private GridPane matrixPane;
     private Matriz<ImageView> matriz;
 
     public void setApp(MainCliente application, Cliente cliente) {
@@ -63,37 +61,37 @@ public class TableroController implements Initializable {
     }
 
     public void crearPartida(Partida partida) {
-        this.partida = partida;
-        Dificultad dificultad = partida.getDificultad();
-        matriz = new Matriz<>(dificultad.getFil(), dificultad.getCol(), new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen())));
-
-        for (int i = 0; i < partida.getDificultad().getFil(); i++) {
-            for (int j = 0; j < partida.getDificultad().getCol(); j++) {
-                ImageView imagen = new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen()));
-                imagen.setFitHeight(25);
-                imagen.setFitWidth(25);
-                imagen.setPreserveRatio(true);
-                MatrizPane.add(imagen, i, j);
-                matriz.set(i, j, imagen);
-            }
-        }
+//        this.partida = partida;
+//        Dificultad dificultad = partida.getDificultad();
+//        matriz = new Matriz<>(dificultad.getFil(), dificultad.getCol(), new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen())));
+//
+//        for (int i = 0; i < partida.getDificultad().getFil(); i++) {
+//            for (int j = 0; j < partida.getDificultad().getCol(); j++) {
+//                ImageView imagen = new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen()));
+//                imagen.setFitHeight(25);
+//                imagen.setFitWidth(25);
+//                imagen.setPreserveRatio(true);
+//                MatrizPane.add(imagen, i, j);
+//                matriz.set(i, j, imagen);
+//            }
+//        }
     }
 
     public void cerrarPartida(Partida partida) {
-        this.partida = partida;
-        Dificultad dificultad = partida.getDificultad();
-        matriz = new Matriz<>(dificultad.getFil(), dificultad.getCol(), new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen())));
-
-        for (int i = 0; i < partida.getDificultad().getFil(); i++) {
-            for (int j = 0; j < partida.getDificultad().getCol(); j++) {
-                ImageView imagen = new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen()));
-                imagen.setFitHeight(25);
-                imagen.setFitWidth(25);
-                imagen.setPreserveRatio(true);
-                MatrizPane.add(imagen, i, j);
-                matriz.set(i, j, imagen);
-            }
-        }
+//        this.partida = partida;
+//        Dificultad dificultad = partida.getDificultad();
+//        matriz = new Matriz<>(dificultad.getFil(), dificultad.getCol(), new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen())));
+//
+//        for (int i = 0; i < partida.getDificultad().getFil(); i++) {
+//            for (int j = 0; j < partida.getDificultad().getCol(); j++) {
+//                ImageView imagen = new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen()));
+//                imagen.setFitHeight(25);
+//                imagen.setFitWidth(25);
+//                imagen.setPreserveRatio(true);
+//                MatrizPane.add(imagen, i, j);
+//                matriz.set(i, j, imagen);
+//            }
+//        }
     }
 
     private Image getImagen(String path) {

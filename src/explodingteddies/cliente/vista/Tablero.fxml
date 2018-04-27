@@ -35,7 +35,7 @@
         <Label fx:id="TxtDificultad" layoutX="261.0" layoutY="126.0" prefHeight="26.0" prefWidth="87.0" text="Dificl" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0e0e0e" height="50.0" layoutX="170.0" layoutY="36.0" opacity="0.26" stroke="BLACK" strokeType="INSIDE" width="60.0" />
         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0e0e0e" height="50.0" layoutX="418.0" layoutY="36.0" opacity="0.26" stroke="BLACK" strokeType="INSIDE" width="80.0" />
-        <GridPane fx:id="MatrizPane" focusTraversable="true" layoutX="127.0" layoutY="163.0" opacity="0.35" prefHeight="292.0" prefWidth="434.0" styleClass="button">
+        <GridPane fx:id="matrixPane" focusTraversable="true" layoutX="127.0" layoutY="163.0" opacity="0.35" prefHeight="292.0" prefWidth="434.0" styleClass="button">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
