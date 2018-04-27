@@ -14,13 +14,17 @@ import explodingteddies.cliente.MainCliente;
 import explodingteddies.modelo.tablero.Tablero;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.GridPane;
 
 /**
  * FXML Controller class
  *
  * @author melbe
  */
+
+
 public class TableroController implements Initializable {
     
     // Variables TCP
@@ -31,18 +35,34 @@ public class TableroController implements Initializable {
 
     // Variables de las ventanas
     private MainCliente application;
+    // Variable del Panel GEenerico
+    private GridPane MatrizPane;
 
     public void setApp(MainCliente application) {
         this.application = application;
     }
     
+    
+    
+    
     @Override
+    @FXML
     public void initialize(URL url, ResourceBundle rb) {
+        
+        MatrizPane.addColumn(6, MatrizPane);
+        MatrizPane.addRow(50, MatrizPane);
+        
+        
+       
+    
 //        btnJugar.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
 //                -> {
 //            System.out.println("btnPeliculas");
 //            application.gotoVerPeliculas();
 //        });
+
+    
     }
+  
     
 }
