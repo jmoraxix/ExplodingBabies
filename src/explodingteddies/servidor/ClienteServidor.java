@@ -12,6 +12,9 @@ package explodingteddies.servidor;
 import explodingteddies.modelo.Dificultad;
 import explodingteddies.modelo.Jugador;
 import explodingteddies.modelo.Notificacion;
+import static explodingteddies.modelo.Notificacion.CLIENTE_ENTRA_USUARIO;
+import static explodingteddies.modelo.Notificacion.CLIENTE_HACE_JUGADA;
+import static explodingteddies.modelo.Notificacion.SERVIDOR_CIERRA_PARTIDA;
 import explodingteddies.modelo.Partida;
 import explodingteddies.util.Util;
 import java.io.IOException;
@@ -67,10 +70,10 @@ public class ClienteServidor extends Thread {
                 String[] datos = entrada.split(";"); // Divide los datos de la entrada en cada ';'
 
                 switch (Notificacion.convertirValor(Integer.parseInt(datos[0]))) {
-                    case ENTRA_USUARIO:
+                    case CLIENTE_ENTRA_USUARIO:
                         entraUsuario(datos[1], datos[2]);
                         break;
-                    case HACE_JUGADA:
+                    case CLIENTE_HACE_JUGADA:
                         break;
                     case ENTRA_VISITA:
                         break;
@@ -107,9 +110,9 @@ public class ClienteServidor extends Thread {
         if (!existePartida) {
             partida = new Partida(dificultad);
             jugador = new Jugador(strJugador);
-            mensaje = Notificacion.ABRE_PARTIDA.getValor() + ";";
+            mensaje = Notificacion.SERVIDOR_ABRE_PARTIDA.getValor() + ";";
         } else {
-            mensaje = Notificacion.CIERRA_PARTIDA.getValor() + ";";
+            mensaje = Notificacion.SERVIDOR_CIERRA_PARTIDA.getValor() + ";";
         }
 
         try {
