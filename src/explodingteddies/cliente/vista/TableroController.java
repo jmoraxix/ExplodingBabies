@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.GridPane;
+import javafx.scene.Node;
 
 /**
  * FXML Controller class
@@ -52,6 +53,7 @@ public class TableroController implements Initializable {
         
         MatrizPane.add(button, 3, 2);
         MatrizPane.addColumn(25, MatrizPane);
+        MatrizPane.addRow(0, children);
         
         
         
