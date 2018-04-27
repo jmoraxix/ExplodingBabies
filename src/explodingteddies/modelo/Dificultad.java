@@ -59,6 +59,11 @@ public enum Dificultad {
         return resultado;
     }
 
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
     public String getNombre() {
         return nombre;
     }

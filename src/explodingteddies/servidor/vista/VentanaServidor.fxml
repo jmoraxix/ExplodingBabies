@@ -14,7 +14,7 @@
         <URL value="@servidorfxml.css" />
     </stylesheets>
     <children>
-        <GridPane layoutX="7.0" layoutY="7.0" prefHeight="522.0" prefWidth="635.0" stylesheets="@servidorfxml.css">
+        <GridPane layoutX="7.0" layoutY="7.0" prefHeight="825.0" prefWidth="975.0" stylesheets="@servidorfxml.css">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

@@ -34,15 +34,10 @@ public class VentanaServidorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//       btnReservaciones.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
-//                -> {
-//            System.out.println("btnReservaciones");
-//        });
-
         this.txtPanel.setWrapText(false);
     }
 
     public synchronized void addMessage(String message) {
-        this.txtPanel.appendText("\n" + new Date() + " - " + message);
+        this.txtPanel.appendText(new Date() + " - " + message + "\n");
     }
 }

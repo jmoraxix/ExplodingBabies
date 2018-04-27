@@ -20,8 +20,8 @@ import explodingteddies.modelo.Jugador;
 public class Util {
 
     //Variables de las ventanas
-    public static int WIDTH = 650;
-    public static int HEIGHT = 550;
+    public static int WIDTH = 975;
+    public static int HEIGHT = 825;
 
     //Variables de TCP
     public static int SERVER_PORT = 2356;
