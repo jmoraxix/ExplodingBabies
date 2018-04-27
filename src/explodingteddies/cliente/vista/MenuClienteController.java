@@ -11,6 +11,7 @@ package explodingteddies.cliente.vista;
 
 import explodingteddies.cliente.MainCliente;
 import explodingteddies.modelo.Dificultad;
+import explodingteddies.modelo.Jugador;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -58,7 +59,7 @@ public class MenuClienteController implements Initializable {
             if (!txtJugador.getText().equals("")) {
                 System.out.println("Cambiando a tablero: " + cbDificultad.getValue().toString());
                 application.entraUsuario(cbDificultad.getValue(), txtJugador.getText());
-                application.gotoTablero(cbDificultad.getValue());
+                application.gotoTablero(cbDificultad.getValue(), new Jugador(txtJugador.getText()));
             } else {
                 lblError.setTextFill(Color.FIREBRICK);
                 lblError.setText("Favor ingresar su jugador");

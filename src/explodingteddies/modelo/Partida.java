@@ -10,6 +10,9 @@
 package explodingteddies.modelo;
 
 import explodingteddies.modelo.tablero.CampoMinado;
+import explodingteddies.modelo.tablero.ContenidoBloque;
+import explodingteddies.modelo.tablero.EstadoBloque;
+import explodingteddies.modelo.tablero.Matriz;
 import explodingteddies.modelo.tablero.Tablero;
 import java.util.ArrayList;
 
@@ -53,6 +56,14 @@ public class Partida {
     public int getCantidadJugadores() {
         return this.jugadores.size();
     }
+    
+    public Jugador getJugador1(){
+        return getCantidadJugadores()>0?this.jugadores.get(0):null;
+    }
+    
+    public Jugador getJugador2(){
+        return getCantidadJugadores()>1?this.jugadores.get(1):null;
+    }
 
     public boolean addJugador(Jugador jugador) {
         if (this.getCantidadJugadores() <= 1) {
@@ -86,5 +97,19 @@ public class Partida {
     public CampoMinado getCampoMinado() {
         return tablero.getCampoMinado();
     }
+             
+    // Getters de las matrices
+    public Matriz<ContenidoBloque> getMatrizContenidoBloque() {
+        return getCampoMinado().getMatrizContenidoBloque();
+    }
+
+    public Matriz<Integer> getMatrizAdyacencias() {
+        return getCampoMinado().getMatrizAdyacencias();
+    }
+
+    public Matriz<EstadoBloque> getMatrizEstadoBloque() {
+        return getCampoMinado().getMatrizEstadoBloque();
+    }
+    
 
 }

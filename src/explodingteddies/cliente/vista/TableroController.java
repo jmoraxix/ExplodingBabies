@@ -13,8 +13,10 @@ import explodingteddies.cliente.Cliente;
 import explodingteddies.cliente.MainCliente;
 import explodingteddies.modelo.Cronometro;
 import explodingteddies.modelo.Dificultad;
+import explodingteddies.modelo.Jugador;
 import explodingteddies.modelo.Partida;
 import explodingteddies.modelo.tablero.ContenidoBloque;
+import explodingteddies.modelo.tablero.EstadoBloque;
 import explodingteddies.modelo.tablero.Matriz;
 import java.net.URL;
 import java.util.Optional;
@@ -50,12 +52,16 @@ public class TableroController implements Initializable {
     private Partida partida;
     private Dificultad dificultad;
     private Cronometro cronometro = new Cronometro(this);
+    private Jugador jugador1, jugador2;
+    private Jugador turno, yo;
+    private boolean partidaLista = false;
+    private Matriz<ImageView> matrizImagenes;
+    private Matriz<Label> matrizLabelAdyacencia;
 
     // Variables de las ventanas
     private MainCliente application;
 
     // Variables de la ventana
-    private Matriz<ImageView> matriz;
     @FXML
     private GridPane matrixPane;
     @FXML
@@ -70,58 +76,6 @@ public class TableroController implements Initializable {
     private Label lblMinas;
     @FXML
     private Label lblTiempo;
-
-    public void setApp(MainCliente application, Cliente cliente, Dificultad dificultad) {
-        this.application = application;
-        this.cliente = cliente;
-        this.dificultad = dificultad;
-        lblDificultad.setText(dificultad.toString());
-        lblMinas.setText(String.valueOf(dificultad.getCantidadMinas()));
-        setTiempo(0);
-        System.out.println(dificultad.toString());
-
-        matriz = new Matriz<>(dificultad.getFil(), dificultad.getCol(), new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen())));
-
-        RowConstraints rc = new RowConstraints();
-        rc.setPercentHeight(100 / dificultad.getFil());
-        rc.setVgrow(Priority.ALWAYS); // allow row to grow
-        rc.setFillHeight(true); // ask nodes to fill height for row
-        for (int rowIndex = 0; rowIndex < dificultad.getFil(); rowIndex++) {
-            matrixPane.getRowConstraints().add(rc);
-        }
-        ColumnConstraints cc = new ColumnConstraints();
-        cc.setPercentWidth(100 / dificultad.getCol());
-        cc.setHgrow(Priority.ALWAYS); // allow column to grow
-        cc.setFillWidth(true); // ask nodes to fill space for column
-        for (int colIndex = 0; colIndex < dificultad.getCol(); colIndex++) {
-            matrixPane.getColumnConstraints().add(cc);
-        }
-        matrixPane.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
-
-        for (int i = 0; i < this.dificultad.getFil(); i++) {
-            for (int j = 0; j < this.dificultad.getCol(); j++) {
-                ImageView imagen = new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen()));
-                imagen.setFitHeight(25);
-                imagen.setFitWidth(25);
-                imagen.setPreserveRatio(true);
-                imagen.setUserData(i + ";" + j);
-
-                imagen.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
-                        -> {
-                    System.out.println("Saliendo del tablero");
-                    ImageView view = (ImageView) e.getSource();
-                    String valores = (String) view.getUserData();
-                    int x = Integer.valueOf(valores.split(";")[0]);
-                    int y = Integer.valueOf(valores.split(";")[1]);
-                    System.out.println("Enviando jugada: " + x + ", " + y);
-                    cliente.enviaJugada(x, y);
-                });
-
-                matrixPane.add(imagen, i, j);
-                matriz.set(i, j, imagen);
-            }
-        }
-    }
 
     @Override
     @FXML
@@ -151,38 +105,142 @@ public class TableroController implements Initializable {
         });
 
         matrixPane.setMaxSize(822, 544);
+        matrixPane.setMinSize(822, 544);
     }
 
-    public void crearPartida(Partida partida) {
-//        this.partida = partida;
-//        Dificultad dificultad = partida.getDificultad();
+    public void setApp(MainCliente application, Cliente cliente, Dificultad dificultad, Jugador jugador) {
+        // Definimos variables pendientes
+        this.application = application;
+        this.cliente = cliente;
+        this.dificultad = dificultad;
+        lblDificultad.setText(dificultad.toString());
+        lblMinas.setText(String.valueOf(dificultad.getCantidadMinas()));
+        setTiempo(0);
+        yo = jugador;
+        turno = yo;
+        lblJugador1.setText(yo.getJugador());
+        lblJugador2.setText("Esperando jugador");
+
+        matrizImagenes = new Matriz<>(dificultad.getFil(), dificultad.getCol(), getImagen(ContenidoBloque.NORMAL.getImagen()));
+        matrizLabelAdyacencia = new Matriz<>(dificultad.getFil(), dificultad.getCol(), new Label());
+
+        matrixPane.getRowConstraints().remove(0, matrixPane.getRowConstraints().size());
+        matrixPane.getColumnConstraints().remove(0, matrixPane.getColumnConstraints().size());
+
+        RowConstraints rc = new RowConstraints();
+        rc.setPercentHeight(100 / dificultad.getFil());
+        rc.setVgrow(Priority.ALWAYS); // allow row to grow
+        rc.setFillHeight(true); // ask nodes to fill height for row
+        for (int rowIndex = 0; rowIndex < dificultad.getFil(); rowIndex++) {
+            matrixPane.getRowConstraints().add(rc);
+        }
+        ColumnConstraints cc = new ColumnConstraints();
+        cc.setPercentWidth(100 / dificultad.getCol());
+        cc.setHgrow(Priority.ALWAYS); // allow column to grow
+        cc.setFillWidth(true); // ask nodes to fill space for column
+        for (int colIndex = 0; colIndex < dificultad.getCol(); colIndex++) {
+            matrixPane.getColumnConstraints().add(cc);
+        }
+//        matrixPane.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
+
+        for (int i = 0; i < this.dificultad.getFil(); i++) {
+            for (int j = 0; j < this.dificultad.getCol(); j++) {
+                ImageView imagen = getImagen(ContenidoBloque.NORMAL.getImagen());
+                imagen.setUserData(i + ";" + j);
+                imagen.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
+                        -> {
+                    ImageView view = (ImageView) e.getSource();
+                    String valores = (String) view.getUserData();
+                    int x = Integer.valueOf(valores.split(";")[0]);
+                    int y = Integer.valueOf(valores.split(";")[1]);
+                    System.out.println("Enviando jugada: " + x + ", " + y);
+                    enviarJugada(x, y);
+                });
+                
+                Label lbl = new Label("");
+
+                matrixPane.add(imagen, j, i);
+                matrixPane.add(lbl, j, i);
+                matrizImagenes.set(i, j, imagen);
+                matrizLabelAdyacencia.set(i, j, lbl);
+            }
+        }
     }
 
-    public void cerrarPartida(Partida partida) {
-//        this.partida = partida;
-//        Dificultad dificultad = partida.getDificultad();
-//        matriz = new Matriz<>(dificultad.getFil(), dificultad.getCol(), new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen())));
-//
-//        for (int i = 0; i < partida.getDificultad().getFil(); i++) {
-//            for (int j = 0; j < partida.getDificultad().getCol(); j++) {
-//                ImageView imagen = new ImageView(getImagen(ContenidoBloque.NORMAL.getImagen()));
-//                imagen.setFitHeight(25);
-//                imagen.setFitWidth(25);
-//                imagen.setPreserveRatio(true);
-//                MatrizPane.add(imagen, i, j);
-//                matriz.set(i, j, imagen);
-//            }
-//        }
+    // Inicializamos las varibles con la partida generada por el servidor
+    public void crearPartida(Partida partidaNueva) {
+        this.partida = partidaNueva;
+        dificultad = partida.getDificultad();
     }
 
-    private Image getImagen(String path) {
-//        FileInputStream imgBloque = null;
-//        try {
-//            imgBloque = new FileInputStream(path);
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(TableroController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        return new Image(this.getClass().getResource(path).toExternalForm());
+    // Inicializamos las variables con el nuevo jugador e iniciamos el juego
+    public void cerrarPartida(Partida partidaNueva) {
+        // Actualizamos variables
+        this.partida = partidaNueva;
+        dificultad = partida.getDificultad();
+
+        // Definimos jugadores en base a la nueva partida
+        jugador1 = partida.getJugador1();
+        jugador2 = partida.getJugador2();
+        this.lblJugador1.setText(jugador1.getJugador());
+        this.lblJugador2.setText(jugador2.getJugador());
+        turno = jugador1;
+        lblJugador1.setId("turnoActual");
+        lblJugador2.setId("normal");
+
+        this.partidaLista = true;
+        cronometro.start();
+    }
+
+    private void enviarJugada(int x, int y) {
+        if (partidaLista && turno == yo) {
+            cliente.enviaJugada(yo, x, y);
+            cambioTurno();
+        }
+    }
+    
+    // Recibimos una nueva matriz y la mapeamos con el tablero actual
+    public void recibeJugada(Partida partidaNueva){
+        this.partida = partidaNueva;
+        lblMinas.setText(String.valueOf(dificultad.getCantidadMinas() - partida.getCampoMinado().getMinasEcontradas()));
+        
+        for (int i = 0; i < this.dificultad.getFil(); i++) {
+            for (int j = 0; j < this.dificultad.getCol(); j++) {
+                ImageView imagen = matrizImagenes.get(i, j);
+                Label lbl = matrizLabelAdyacencia.get(i, j);
+                
+                if(partida.getMatrizEstadoBloque().get(i, j) == EstadoBloque.DESCUBIERTO){
+                    imagen.setImage(new Image(partida.getMatrizContenidoBloque().get(i, j).getImagen()));
+                    if(partida.getMatrizContenidoBloque().get(i, j) == ContenidoBloque.PRESIONADO)
+                        lbl.setText(String.valueOf(partida.getMatrizAdyacencias().get(i, j)));
+                } else if(partida.getMatrizEstadoBloque().get(i, j) == EstadoBloque.MARCADO){
+                    imagen.setImage(new Image(ContenidoBloque.MARCA.getImagen()));
+                }
+            }
+        }
+            
+        cambioTurno();
+    }
+
+    private void cambioTurno() {
+        if (turno == jugador1) {
+            turno = jugador2;
+            lblJugador1.setId("normal");
+            lblJugador2.setId("turnoActual");
+        } else {
+            turno = jugador1;
+            lblJugador1.setId("turnoActual");
+            lblJugador2.setId("normal");
+        }
+    }
+
+    private ImageView getImagen(String path) {
+        ImageView imagen = new ImageView(this.getClass().getResource(path).toExternalForm());
+        imagen.setFitHeight(25);
+        imagen.setFitWidth(25);
+        imagen.setPreserveRatio(true);
+        imagen.setStyle("-fx-background-color: white; -fx-grid-lines-visible: true");
+        return imagen;
     }
 
     public void setTiempo(int tiempo) {
@@ -191,5 +249,4 @@ public class TableroController implements Initializable {
                 TimeUnit.MILLISECONDS.toSeconds(tiempo) % TimeUnit.MINUTES.toSeconds(1));
         lblTiempo.setText(hms);
     }
-
 }

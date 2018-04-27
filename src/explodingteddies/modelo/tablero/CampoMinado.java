@@ -208,7 +208,7 @@ public class CampoMinado {
             marcarCampo(x, y);
         }
     }
-
+         
     // Getters de las matrices
     public Matriz<ContenidoBloque> getMatrizContenidoBloque() {
         return matrizContenidoBloque;
@@ -222,4 +222,7 @@ public class CampoMinado {
         return matrizEstadoBloque;
     }
 
+    public int getMinasEcontradas() {
+        return minasEcontradas;
+    }
 }

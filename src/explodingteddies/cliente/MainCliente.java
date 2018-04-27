@@ -39,8 +39,7 @@ public class MainCliente extends Application {
     private Cliente cliente;
 
     // Variables del juego
-    private Partida partida = null;
-    private Jugador jugador = null;
+    private TableroController tablero;
 
     /**
      * @param args the command line arguments
@@ -76,10 +75,10 @@ public class MainCliente extends Application {
         }
     }
 
-    public void gotoTablero(Dificultad dificultad) {
+    public void gotoTablero(Dificultad dificultad, Jugador jugador) {
         try {
-            TableroController tablero = (TableroController) replaceSceneContent("Tablero.fxml");
-            tablero.setApp(this, cliente, dificultad);
+            tablero = (TableroController) replaceSceneContent("Tablero.fxml");
+            tablero.setApp(this, cliente, dificultad, jugador);
         } catch (Exception ex) {
             Logger.getLogger(MainCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -105,6 +104,21 @@ public class MainCliente extends Application {
     // Metodos de TCP
     public void entraUsuario(Dificultad dificultad, String usuario) {
         cliente.entraUsuario(dificultad, usuario);
+    }
+
+    // Inicializamos las varibles con la partida generada por el servidor
+    public void crearPartida(Partida partidaNueva) {
+        tablero.crearPartida(partidaNueva);
+    }
+
+    // Inicializamos las variables con el nuevo jugador e iniciamos el juego
+    public void cerrarPartida(Partida partidaNueva) {
+        tablero.cerrarPartida(partidaNueva);
+    }
+    
+    // Recibimos una nueva matriz y la mapeamos con el tablero actual
+    public void recibeJugada(Partida partidaNueva){
+        tablero.recibeJugada(partidaNueva);
     }
 
     //Getters & Setters
