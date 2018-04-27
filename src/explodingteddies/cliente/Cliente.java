@@ -9,8 +9,12 @@
  */
 package explodingteddies.cliente;
 
+import explodingteddies.modelo.Dificultad;
+import explodingteddies.modelo.Jugador;
 import explodingteddies.modelo.Notificacion;
 import static explodingteddies.modelo.Notificacion.*;
+import explodingteddies.modelo.Partida;
+import explodingteddies.servidor.Servidor;
 import explodingteddies.util.Util;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -20,17 +24,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Cliente TCP que se conecta con el servidor
  *
  * @author jmora
  */
 public class Cliente extends Thread {
 
+    // Variables TCP
     protected static String SERVER_IP = Util.SERVER_IP;
     protected static int SERVER_PORT = Util.SERVER_PORT;
     protected ObjectOutputStream out;
     protected ObjectInputStream in;
     protected Socket socket;
+
+    // Variables de la aplicacion
     private MainCliente application;
+    private Partida partida;
+    private Jugador jugador;
 
     /**
      * Declara un nuevo cliente. Crea la conexion con el servidor y define los streams
@@ -59,17 +69,21 @@ public class Cliente extends Thread {
             try {
                 // Recibe un dato de entrada
                 String entrada = in.readUTF();
-                System.out.println(entrada);
+//                System.out.println(entrada);
                 String[] datos = entrada.split(";"); // Divide los datos de la entrada en cada ';'
 
                 switch (Notificacion.convertirValor(Integer.parseInt(datos[0]))) {
                     case ABRE_PARTIDA:
+                        abrirPartida(datos[1]);
                         break;
                     case CIERRA_PARTIDA:
+                        cerrarPartida(datos[1]);
                         break;
                     case ENVIA_JUGADA:
+//                        recibeJugada(datos[1]);
                         break;
                     case TERMINA_PARTIDA:
+//                        terminaPartida(datos[1]);
                         break;
                     default:
                         break;
@@ -92,32 +106,22 @@ public class Cliente extends Thread {
         }
     }
 
-//    public void crearUsuario(Jugador usuario) {
-//        Gson gson = Util.getGson();
-//
-//        try {
-//            System.out.println("Creando usuario");
-//            System.out.println(gson.toJson(usuario));
-//            out.writeUTF(Notificacion.CREA_USUARIO.getValor() + ";" + gson.toJson(usuario));
-//            out.flush();
-//        } catch (IOException ex) {
-//            Logger.getLogger(Cliente.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-    // GETTERS & SETTERS
-    /**
-     *
-     * @return SERVER_IP
-     */
-    public static String getSERVER_IP() {
-        return SERVER_IP;
+    public void entraUsuario(Dificultad dificultad, String usuario) {
+        try {
+            out.writeUTF(Notificacion.ENTRA_USUARIO + ";" + dificultad.toString() + ";" + usuario + "\n");
+            out.flush();
+            //System.out.println("notificarCambioColaACliente");
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    /**
-     *
-     * @param SERVER_IP
-     */
-    public static void setSERVER_IP(String SERVER_IP) {
-        Cliente.SERVER_IP = SERVER_IP;
+    private void abrirPartida(String json) {
+        Partida partida = Util.getGson().fromJson(json, Partida.class);
+    }
+
+    private void cerrarPartida(String json) {
+        Partida partida = Util.getGson().fromJson(json, Partida.class);
+
     }
 }

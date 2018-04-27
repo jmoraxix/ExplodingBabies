@@ -9,6 +9,7 @@
  */
 package explodingteddies.modelo;
 
+import explodingteddies.modelo.tablero.CampoMinado;
 import explodingteddies.modelo.tablero.Tablero;
 import java.util.ArrayList;
 
@@ -72,6 +73,18 @@ public class Partida {
 
     public int getCodigoPartida() {
         return codigoPartida;
+    }
+
+    public Dificultad getDificultad() {
+        return dificultad;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
+    public CampoMinado getCampoMinado() {
+        return tablero.getCampoMinado();
     }
 
 }

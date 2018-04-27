@@ -12,6 +12,8 @@ package explodingteddies.cliente;
 import explodingteddies.cliente.vista.MenuClienteController;
 import explodingteddies.cliente.vista.TableroController;
 import explodingteddies.modelo.Dificultad;
+import explodingteddies.modelo.Jugador;
+import explodingteddies.modelo.Partida;
 import explodingteddies.util.Util;
 import java.io.InputStream;
 import java.util.logging.Level;
@@ -35,6 +37,10 @@ public class MainCliente extends Application {
 
     //Variables del cliente TCP
     private Cliente cliente;
+
+    // Variables del juego
+    private Partida partida = null;
+    private Jugador jugador = null;
 
     /**
      * @param args the command line arguments
@@ -72,8 +78,8 @@ public class MainCliente extends Application {
 
     public void gotoTablero(Dificultad dificultad) {
         try {
-            TableroController tablero = (TableroController) replaceSceneContent("TableroGenerico.fxml");
-            tablero.setApp(this);
+            TableroController tablero = (TableroController) replaceSceneContent("Tablero.fxml");
+            tablero.setApp(this, cliente);
         } catch (Exception ex) {
             Logger.getLogger(MainCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -94,6 +100,11 @@ public class MainCliente extends Application {
         stage.setScene(scene);
         stage.sizeToScene();
         return (Initializable) loader.getController();
+    }
+
+    // Metodos de TCP
+    public void entraUsuario(Dificultad dificultad, String usuario) {
+        cliente.entraUsuario(dificultad, usuario);
     }
 
     //Getters & Setters

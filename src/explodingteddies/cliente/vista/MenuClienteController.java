@@ -30,11 +30,15 @@ import javafx.scene.paint.Color;
 public class MenuClienteController implements Initializable {
 
     // Variables de la ventana
-    @FXML private Label lblError;
-    @FXML private ComboBox<Dificultad> cbDificultad;
-    @FXML private TextField txtJugador;
-    @FXML private Button btnJugar;
-    
+    @FXML
+    private Label lblError;
+    @FXML
+    private ComboBox<Dificultad> cbDificultad;
+    @FXML
+    private TextField txtJugador;
+    @FXML
+    private Button btnJugar;
+
     private MainCliente application;
 
     public void setApp(MainCliente application) {
@@ -45,14 +49,15 @@ public class MenuClienteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cbDificultad.getItems().addAll(Dificultad.values());
         cbDificultad.setValue(Dificultad.FACIL);
-        
+
         lblError.setText("");
-        
+
         btnJugar.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent e)
                 -> {
-            
-            if(!txtJugador.getText().equals("")){
+
+            if (!txtJugador.getText().equals("")) {
                 System.out.println("Cambiando a tablero: " + cbDificultad.getValue().toString());
+                application.entraUsuario(cbDificultad.getValue(), txtJugador.getText());
                 application.gotoTablero(cbDificultad.getValue());
             } else {
                 lblError.setTextFill(Color.FIREBRICK);

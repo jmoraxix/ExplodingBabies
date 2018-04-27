@@ -33,7 +33,7 @@ public class ClienteServidor extends Thread {
     private final Servidor servidor;
     private boolean isRunning = true;
 
-    // Variables partida;
+    // Variables de la partida;
     private Partida partida = null;
     private Jugador jugador = null;
 
@@ -55,7 +55,6 @@ public class ClienteServidor extends Thread {
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @Override
