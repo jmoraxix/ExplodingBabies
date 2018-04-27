@@ -38,6 +38,7 @@ public class TableroController implements Initializable {
     // Variable del Panel GEenerico
     private GridPane MatrizPane;
 
+    
     public void setApp(MainCliente application) {
         this.application = application;
     }
@@ -49,8 +50,10 @@ public class TableroController implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle rb) {
         
-        MatrizPane.addColumn(6, MatrizPane);
-        MatrizPane.addRow(50, MatrizPane);
+        MatrizPane.add(button, 3, 2);
+        MatrizPane.addColumn(25, MatrizPane);
+        
+        
         
         
        

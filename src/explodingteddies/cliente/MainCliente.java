@@ -72,7 +72,7 @@ public class MainCliente extends Application {
 
     public void gotoTablero(Dificultad dificultad) {
         try {
-            TableroController tablero = (TableroController) replaceSceneContent("Tablero9x9.fxml");
+            TableroController tablero = (TableroController) replaceSceneContent("TableroGenerico.fxml");
             tablero.setApp(this);
         } catch (Exception ex) {
             Logger.getLogger(MainCliente.class.getName()).log(Level.SEVERE, null, ex);
