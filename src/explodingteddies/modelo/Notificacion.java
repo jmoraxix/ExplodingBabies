@@ -15,12 +15,12 @@ package explodingteddies.modelo;
  */
 public enum Notificacion {
 
-    ENTRA_USUARIO(1),
-    ABRE_PARTIDA(2),
-    CIERRA_PARTIDA(3),
-    HACE_JUGADA(4),
-    ENVIA_JUGADA(5),
-    TERMINA_PARTIDA(6),
+    CLIENTE_ENTRA_USUARIO(1),
+    SERVIDOR_ABRE_PARTIDA(2),
+    SERVIDOR_CIERRA_PARTIDA(3),
+    CLIENTE_HACE_JUGADA(4),
+    SERVIDOR_ENVIA_JUGADA(5),
+    SERVIDOR_TERMINA_PARTIDA(6),
     ENTRA_VISITA(7),
     ERROR(8);
 
@@ -39,22 +39,22 @@ public enum Notificacion {
 
         switch (valor) {
             case 1:
-                resultado = ENTRA_USUARIO;
+                resultado = CLIENTE_ENTRA_USUARIO;
                 break;
             case 2:
-                resultado = ABRE_PARTIDA;
+                resultado = SERVIDOR_ABRE_PARTIDA;
                 break;
             case 3:
-                resultado = CIERRA_PARTIDA;
+                resultado = SERVIDOR_CIERRA_PARTIDA;
                 break;
             case 4:
-                resultado = HACE_JUGADA;
+                resultado = CLIENTE_HACE_JUGADA;
                 break;
             case 5:
-                resultado = ENVIA_JUGADA;
+                resultado = SERVIDOR_ENVIA_JUGADA;
                 break;
             case 6:
-                resultado = TERMINA_PARTIDA;
+                resultado = SERVIDOR_TERMINA_PARTIDA;
                 break;
             case 7:
                 resultado = ENTRA_VISITA;
