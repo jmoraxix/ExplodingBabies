@@ -63,7 +63,7 @@ public class ClienteServidor extends Thread {
             try {
                 // Recibe un dato de entrada
                 String entrada = in.readUTF();
-//                System.out.println(entrada);
+                servidor.agregarLog(entrada);
                 String[] datos = entrada.split(";"); // Divide los datos de la entrada en cada ';'
 
                 switch (Notificacion.convertirValor(Integer.parseInt(datos[0]))) {
@@ -92,32 +92,30 @@ public class ClienteServidor extends Thread {
      */
     public void entraUsuario(final String strDif, final String strJugador) {
         Dificultad dificultad = Dificultad.convertirValor(Integer.valueOf(strDif));
+        Jugador jugador = new Jugador(strJugador);
 
         boolean existePartida = false;
         for (Partida p : servidor.getPartidas()) {
-            for (Jugador j : p.getJugadores()) {
-                if (j.getJugador().equals(strJugador)) {
-                    existePartida = true;
-                    partida = p;
-                    jugador = j;
-                }
+            if (p.addJugador(jugador)) {
+                existePartida = true;
+                partida = p;
+                this.jugador = jugador;
             }
         }
 
         String mensaje = "";
         if (!existePartida) {
-            partida = new Partida(dificultad);
-            jugador = new Jugador(strJugador);
+            this.partida = new Partida(dificultad);
+            this.jugador = new Jugador(strJugador);
             mensaje = Notificacion.SERVIDOR_ABRE_PARTIDA.getValor() + ";";
         } else {
             mensaje = Notificacion.SERVIDOR_CIERRA_PARTIDA.getValor() + ";";
         }
 
         try {
-            //System.out.println("notificarCambioColaACliente, " + notificacion.getValor());
+//            System.out.println(mensaje + Util.getGson().toJson(partida));
             out.writeUTF(mensaje + Util.getGson().toJson(partida) + "\n");
             out.flush();
-            //System.out.println("notificarCambioColaACliente");
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
         }
