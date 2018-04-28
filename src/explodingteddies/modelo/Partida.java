@@ -12,8 +12,8 @@ package explodingteddies.modelo;
 import explodingteddies.modelo.tablero.CampoMinado;
 import explodingteddies.modelo.tablero.ContenidoBloque;
 import explodingteddies.modelo.tablero.EstadoBloque;
+import explodingteddies.modelo.tablero.EstadoPartida;
 import explodingteddies.modelo.tablero.Matriz;
-import explodingteddies.modelo.tablero.Tablero;
 import java.util.ArrayList;
 
 /**
@@ -27,8 +27,9 @@ public class Partida {
     private ArrayList<Jugador> jugadores = new ArrayList<>();
     private ArrayList<Jugador> visitas = new ArrayList<>();
 
-    private Tablero tablero;
+    private CampoMinado campoMinado;
     private final Dificultad dificultad;
+    private EstadoPartida estadoPartida;
 
     /**
      *
@@ -48,9 +49,32 @@ public class Partida {
         this(dificultad);
         this.jugadores.add(jugador);
     }
+    
+    /**
+     *
+     * @param estado
+     */
+    public void detenerPartida(EstadoPartida estado) {
+        switch (estado) {
+            case GANA:
+                this.estadoPartida = EstadoPartida.GANA;
+                break;
+            case PIERDE:
+                this.estadoPartida = EstadoPartida.PIERDE;
+                break;
+        }
+    }
+    
+    public void procesarJugada(int x, int y, boolean clickDer){
+        this.campoMinado.procesarJugada(x, y, clickDer);
+    }
 
     public ArrayList<Jugador> getJugadores() {
         return jugadores;
+    }
+    
+    public EstadoPartida getEstadoPartida() {
+        return estadoPartida;
     }
 
     public int getCantidadJugadores() {
@@ -90,25 +114,21 @@ public class Partida {
         return dificultad;
     }
 
-    public Tablero getTablero() {
-        return tablero;
-    }
-
     public CampoMinado getCampoMinado() {
-        return tablero.getCampoMinado();
+        return this.campoMinado;
     }
              
     // Getters de las matrices
     public Matriz<ContenidoBloque> getMatrizContenidoBloque() {
-        return getCampoMinado().getMatrizContenidoBloque();
+        return campoMinado.getMatrizContenidoBloque();
     }
 
     public Matriz<Integer> getMatrizAdyacencias() {
-        return getCampoMinado().getMatrizAdyacencias();
+        return campoMinado.getMatrizAdyacencias();
     }
 
     public Matriz<EstadoBloque> getMatrizEstadoBloque() {
-        return getCampoMinado().getMatrizEstadoBloque();
+        return campoMinado.getMatrizEstadoBloque();
     }
     
 

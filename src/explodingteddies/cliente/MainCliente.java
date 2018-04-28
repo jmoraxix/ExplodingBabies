@@ -117,8 +117,8 @@ public class MainCliente extends Application {
     }
     
     // Recibimos una nueva matriz y la mapeamos con el tablero actual
-    public void recibeJugada(Partida partidaNueva){
-        tablero.recibeJugada(partidaNueva);
+    public void recibeJugada(Jugador jugador, Partida partidaNueva){
+        tablero.recibeJugada(jugador, partidaNueva);
     }
 
     //Getters & Setters

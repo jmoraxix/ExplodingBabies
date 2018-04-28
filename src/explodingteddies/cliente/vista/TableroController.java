@@ -154,9 +154,10 @@ public class TableroController implements Initializable {
                     int x = Integer.valueOf(valores.split(";")[0]);
                     int y = Integer.valueOf(valores.split(";")[1]);
                     System.out.println("Enviando jugada: " + x + ", " + y);
-                    enviarJugada(x, y);
+                    Boolean clickDer = e.isSecondaryButtonDown();
+                    enviarJugada(x, y, clickDer);
                 });
-                
+
                 Label lbl = new Label("");
 
                 matrixPane.add(imagen, j, i);
@@ -192,34 +193,37 @@ public class TableroController implements Initializable {
         cronometro.start();
     }
 
-    private void enviarJugada(int x, int y) {
+    private void enviarJugada(int x, int y, boolean clickDer) {
         if (partidaLista && turno == yo) {
-            cliente.enviaJugada(yo, x, y);
+            cliente.enviaJugada(x, y, clickDer);
             cambioTurno();
         }
     }
-    
+
     // Recibimos una nueva matriz y la mapeamos con el tablero actual
-    public void recibeJugada(Partida partidaNueva){
+    public void recibeJugada(Jugador jugadorRecibido, Partida partidaNueva) {
         this.partida = partidaNueva;
         lblMinas.setText(String.valueOf(dificultad.getCantidadMinas() - partida.getCampoMinado().getMinasEcontradas()));
-        
+
         for (int i = 0; i < this.dificultad.getFil(); i++) {
             for (int j = 0; j < this.dificultad.getCol(); j++) {
                 ImageView imagen = matrizImagenes.get(i, j);
                 Label lbl = matrizLabelAdyacencia.get(i, j);
-                
-                if(partida.getMatrizEstadoBloque().get(i, j) == EstadoBloque.DESCUBIERTO){
+
+                if (partida.getMatrizEstadoBloque().get(i, j) == EstadoBloque.DESCUBIERTO) {
                     imagen.setImage(new Image(partida.getMatrizContenidoBloque().get(i, j).getImagen()));
-                    if(partida.getMatrizContenidoBloque().get(i, j) == ContenidoBloque.PRESIONADO)
+                    if (partida.getMatrizContenidoBloque().get(i, j) == ContenidoBloque.PRESIONADO) {
                         lbl.setText(String.valueOf(partida.getMatrizAdyacencias().get(i, j)));
-                } else if(partida.getMatrizEstadoBloque().get(i, j) == EstadoBloque.MARCADO){
+                    }
+                } else if (partida.getMatrizEstadoBloque().get(i, j) == EstadoBloque.MARCADO) {
                     imagen.setImage(new Image(ContenidoBloque.MARCA.getImagen()));
                 }
             }
         }
-            
-        cambioTurno();
+
+        if (jugadorRecibido != yo) {
+            cambioTurno();
+        }
     }
 
     private void cambioTurno() {

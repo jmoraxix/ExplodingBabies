@@ -1,6 +1,7 @@
 package explodingteddies.modelo.tablero;
 
 import explodingteddies.modelo.Dificultad;
+import explodingteddies.modelo.Partida;
 
 /**
  *
@@ -9,7 +10,7 @@ import explodingteddies.modelo.Dificultad;
 public class CampoMinado {
 
     // Variables del juego
-    private Tablero tablero;
+    private Partida partida;
     private Matriz<ContenidoBloque> matrizContenidoBloque;
     private final Matriz<Integer> matrizAdyacencias;
     private Matriz<EstadoBloque> matrizEstadoBloque;
@@ -27,8 +28,8 @@ public class CampoMinado {
      * @param tablero
      * @param dificultad
      */
-    public CampoMinado(Tablero tablero, Dificultad dificultad) {
-        this.tablero = tablero;
+    public CampoMinado(Partida partida, Dificultad dificultad) {
+        this.partida = partida;
         this.dificultad = dificultad;
 
         this.minasEcontradas = 0;
@@ -111,10 +112,10 @@ public class CampoMinado {
             }
             if (pierde) {
                 mostrarMinas();
-                tablero.detenerPartida(EstadoPartida.PIERDE);
+                partida.detenerPartida(EstadoPartida.PIERDE);
             } else if (dificultad.getCantidadMinas() == dificultad.getFil() * dificultad.getCol() - camposDescubiertos) {
                 marcarMinas();
-                tablero.detenerPartida(EstadoPartida.GANA);
+                partida.detenerPartida(EstadoPartida.GANA);
             }
         }
     }
@@ -203,9 +204,11 @@ public class CampoMinado {
      * @param y
      * @param clickDer
      */
-    public void jugar(int x, int y, boolean clickDer) {
+    public void procesarJugada(int x, int y, boolean clickDer) {
         if (clickDer) {
             marcarCampo(x, y);
+        } else {
+            revelarCampos(x, y);
         }
     }
          

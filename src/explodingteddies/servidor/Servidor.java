@@ -83,6 +83,8 @@ public class Servidor extends Thread {
     public void addPartida(Partida partida) {
         this.partidas.add(partida);
     }
+    
+    
 
     /**
      * Agrega un log a la consola y/o interfaz

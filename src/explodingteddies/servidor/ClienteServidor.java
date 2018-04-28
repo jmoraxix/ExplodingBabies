@@ -63,7 +63,7 @@ public class ClienteServidor extends Thread {
             try {
                 // Recibe un dato de entrada
                 String entrada = in.readUTF();
-                System.out.println(entrada);
+//                System.out.println(entrada);
                 String[] datos = entrada.split(";"); // Divide los datos de la entrada en cada ';'
 
                 switch (Notificacion.convertirValor(Integer.parseInt(datos[0]))) {
@@ -71,6 +71,7 @@ public class ClienteServidor extends Thread {
                         entraUsuario(datos[1], datos[2]);
                         break;
                     case CLIENTE_HACE_JUGADA:
+                        procesaJugada(datos[1], datos[2], datos[3]);
                         break;
                     case ENTRA_VISITA:
                         break;
@@ -115,6 +116,47 @@ public class ClienteServidor extends Thread {
         try {
             //System.out.println("notificarCambioColaACliente, " + notificacion.getValor());
             out.writeUTF(mensaje + Util.getGson().toJson(partida) + "\n");
+            out.flush();
+            //System.out.println("notificarCambioColaACliente");
+        } catch (IOException ex) {
+            Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void procesaJugada(String strX, String strY, String strClickDer) {
+        int x = Integer.valueOf(strX);
+        int y = Integer.valueOf(strY);
+        boolean clickDer = strClickDer.equals("1");
+        partida.procesarJugada(x, y, clickDer);
+
+        switch (partida.getEstadoPartida()) {
+            case GANA:
+            case PIERDE:
+                break;
+            case JUGANDO:
+            default:
+                Jugador rival = jugador;
+                for (Jugador j : partida.getJugadores()) {
+                    if (!j.equals(this.jugador)) {
+                        rival = j;
+                    }
+                }
+                for (ClienteServidor cliente : servidor.getClientes()) {
+                    for (Jugador j : cliente.getPartida().getJugadores()) {
+                        if (j.equals(rival)) {
+                            cliente.enviaJugada(jugador, partida);
+                        }
+                    }
+                }
+                this.enviaJugada(jugador, this.partida);
+                break;
+        }
+    }
+
+    public void enviaJugada(Jugador j, Partida p) {
+        try {
+            //System.out.println("notificarCambioColaACliente, " + notificacion.getValor());
+            out.writeUTF(Notificacion.SERVIDOR_ENVIA_JUGADA + ";" + j.getJugador() + ";" + Util.getGson().toJson(partida) + "\n");
             out.flush();
             //System.out.println("notificarCambioColaACliente");
         } catch (IOException ex) {

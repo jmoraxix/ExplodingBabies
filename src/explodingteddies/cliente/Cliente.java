@@ -80,7 +80,7 @@ public class Cliente extends Thread {
                         cerrarPartida(datos[1]);
                         break;
                     case SERVIDOR_ENVIA_JUGADA:
-                        recibeJugada(datos[1]);
+                        recibeJugada(datos[1], datos[2]);
                         break;
                     case SERVIDOR_TERMINA_PARTIDA:
                         terminaPartida(datos[1]);
@@ -116,8 +116,8 @@ public class Cliente extends Thread {
         }
     }
     
-    private void recibeJugada(String json) {
-        application.recibeJugada(Util.getGson().fromJson(json, Partida.class));
+    private void recibeJugada(String strJugador, String json) {
+        application.recibeJugada(new Jugador(strJugador), Util.getGson().fromJson(json, Partida.class));
     }
     
     public void terminaPartida(String json){
@@ -132,10 +132,12 @@ public class Cliente extends Thread {
         application.cerrarPartida(Util.getGson().fromJson(json, Partida.class));
     }
     
-    public void enviaJugada(Jugador jugador, int x, int y){
-        System.out.println("Jugador " + jugador.getJugador() + " envia jugada al servidor: " + x + ", " + y);
+    public void enviaJugada(int x, int y, boolean clickDer){
+        String strClickDer = clickDer?"1":"0";
+        
+        System.out.println("Jugador envia jugada al servidor: " + x + ", " + y);
         try {
-            out.writeUTF(Notificacion.CLIENTE_HACE_JUGADA + ";" + jugador.getJugador() + ";" + x + ";" + y + "\n");
+            out.writeUTF(Notificacion.CLIENTE_HACE_JUGADA + ";" + x + ";" + y + ";" + strClickDer + "\n");
             out.flush();
         } catch (IOException ex) {
             Logger.getLogger(Servidor.class.getName()).log(Level.SEVERE, null, ex);
